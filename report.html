@@ -1,0 +1,154 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><title>CoCo rules verify</title><style>body{font-family:sans-serif;max-width:1200px;margin:auto}table{border-collapse:collapse;margin:8px 0}td,th{border:1px solid #999;padding:3px 6px;font-size:13px}th{background:#eee}</style><body>
+<h1>CoCo 指示ファイル（rules）検出・注入・遵守・強制 検証レポート（CLI / サンドボックス）</h1>
+<h2>1. 概要と結論</h2>
+<li><b>支持（実測）</b>: CLI は git ルートの <code>AGENTS.md / CLAUDE.md / CORTEX.md / RULES.md / .cursorrules</code> を常時検出・注入する（ログ <code>Found N project instruction files</code> / <code>Loading N instruction file(s)</code> と回答中 ID が一致、捏造 0 件）。ユーザースコープは <code>~/AGENTS.md, ~/CLAUDE.md, ~/.claude/CLAUDE.md, ~/.snowflake/cortex/AGENTS.md</code> が注入され、同名のワークスペースファイルがあってもスキップされない（6 ファイル全注入）。</li>
+<li><b>棄却（実測）</b>: <code>SNOWFLAKE.md</code>、<code>.cursor/rules/*.mdc</code>（globs 有無・alwaysApply とも）、<code>.claude/rules/*.md</code>、<code>.github/instructions/*.instructions.md</code>、git ルートより上の <code>AGENTS.md</code>、<code>chat.instructionFilePatterns</code>（repo/ユーザー設定とも）は CLI では検出されない。条件付きルールの遅延ロード（read/write/edit/@メンション後）も一度も発生しなかった。<code>.claude/settings.json</code> の hooks は「無視される」との仮説に反して <b>読み込まれ、5/5 でブロック成功</b>。</li>
+<li><b>強制</b>: <code>.cortex/settings.json</code> と <code>.claude/settings.json</code> の PreToolUse フック（exit 2）は 5/5 でブロック。matcher <code>bash</code> / <code>Bash</code> はどちらも発火（大文字小文字非依存とみられる）。ワークスペースの <code>.snowflake/cortex/settings.json</code> のフックは読み込まれず 2/3 で改変された。AGENTS.md の禁止文言のみでも 5/5 拒否（ただし強制ではなく遵守）。</li>
+<li><b>判定不能</b>: Desktop 関連全項目、コンパクション（TC-32）、条件付きルールの発火条件（CLI が該当形式を読まないため発火しない）。</li>
+<li>注意: N=1〜5 の小標本。初回バッチの一部はメモリ逼迫とみられる SIGKILL（rc=-9）で空回答となり無効扱い。</li>
+<h2>2. 実施環境</h2>
+<table>
+<tr><th>項目</th><th>値</th></tr>
+<tr><td>CLI</td><td>Cortex Code v0.x-sandbox（<code>/usr/local/bin/cortex</code>）</td></tr>
+<tr><td>モデル</td><td><code>-m claude-opus-5-5</code>（成功）。<code>result.modelUsage</code> には <code>claude-opus-5-5</code> の他に補助モデル <code>[AUX-MODEL-A]</code>、時に <code>[AUX-MODEL-B]</code> / <code>[AUX-MODEL-C]</code></td></tr>
+<tr><td>OS</td><td>Linux x86_64（Snowflake AGENT TASK サンドボックス）, HOME=~ (sandbox)</td></tr>
+<tr><td>ツール</td><td>git 2.56, Python 3.12.16, jq 1.8.2</td></tr>
+<tr><td>時刻</td><td>開始 2026-11-11T06:44Z / 終了 約 07:30Z（目標 50 分を超過：引数バグ修正後の再実行のため）</td></tr>
+<tr><td>メモリ</td><td><code>CORTEX_ENABLE_MEMORY=false</code> 指定。ログに <code>Memory disabled (isMemoryEnabled=false); skipping memory manifest injection</code> を確認＝無効</td></tr>
+<tr><td>Desktop</td><td><b>未実施（サンドボックスに Desktop なし）</b></td></tr>
+</table>
+<p>検出シグナル: <code>~/.snowflake/cortex/logs/coco.log</code> の logger <code>coco.instructions</code>（<code>Found N project instruction files: ...</code>, <code>cursorRules found</code>, <code>Loaded N total instruction files</code>）と <code>coco.systemReminders</code>（<code>Loading N instruction file(s): ...</code>）。session_id で各試行と照合。フックは <code>Loaded hooks from project settings at &lt;path&gt;</code> で判定。</p>
+<p>実施上の発見（ハーネス）: <code>cortex exec --allowed</code> は可変長引数のため、直後にメッセージを置くとメッセージを飲み込み <code>requires a message</code> エラーになる。<code>--allowed read --allowed write ... -w &lt;dir&gt; &quot;&lt;msg&gt;&quot;</code> の順で回避。<code>--allowed=read</code> 形式は <code>Unknown argument</code>。<code>cortex -p</code> は stdin を閉じないとハングする。</p>
+<h2>3. ケース集計表（製品は全て CLI(sandbox)）</h2>
+<p>有効 n = 空回答（SIGKILL）を除いた試行数。</p>
+<table>
+<tr><th>TC-ID</th><th>検出(log)</th><th>注入</th><th>遵守率 n/N</th><th>強制 n/N</th><th>docsとの一致</th><th>備考</th></tr>
+<tr><td>TC-01 AGENTS.md</td><td>有</td><td>2/2</td><td>タグ 4/4 (P-HELLO)</td><td>-</td><td>一致</td><td>1+1 試行は SIGKILL で無効</td></tr>
+<tr><td>TC-02 CLAUDE.md</td><td>有</td><td>2/2</td><td>タグ 2/2</td><td>-</td><td>一致</td><td></td></tr>
+<tr><td>TC-02 CORTEX.md</td><td>有</td><td>3/3</td><td>3/3</td><td>-</td><td>一致</td><td></td></tr>
+<tr><td>TC-02 RULES.md</td><td>有</td><td>3/3</td><td>3/3</td><td>-</td><td>要確認</td><td></td></tr>
+<tr><td>TC-02 .cursorrules</td><td>有（<code>Found 1 cursor rule files</code>）</td><td>2/2</td><td>2/2</td><td>-</td><td>一致</td><td></td></tr>
+<tr><td>TC-02 SNOWFLAKE.md</td><td>無（Found 0）</td><td>0/3</td><td>-</td><td>-</td><td>不一致の可能性</td><td>回答 NONE</td></tr>
+<tr><td>TC-02 .cursor/rules/x.mdc</td><td>無</td><td>0/3</td><td>-</td><td>-</td><td>不一致（docs/仮説では対象）</td><td></td></tr>
+<tr><td>TC-02 .claude/rules/x.md</td><td>無</td><td>0/3</td><td>-</td><td>-</td><td>不一致（Claude Code 互換想定）</td><td></td></tr>
+<tr><td>TC-04 agents.md / Claude.md / cortex.MD</td><td>有（3件）</td><td>3/3</td><td>タグ 3/3</td><td>-</td><td>docs未記載</td><td>大文字小文字非依存でマッチ</td></tr>
+<tr><td>TC-03/06/07/15/19/23/F-08 (W1)</td><td>有：.cursorrules, AGENTS, CLAUDE, CORTEX, RULES の 5 件</td><td>1/1（+TC-16/17/18/21/38 で計 23 回同一）</td><td>タグ 5/5</td><td>-</td><td>部分一致</td><td>P-ABOVE, SNOWFLAKE.md, mdc×3, .claude/rules×2, .github/instructions, docs/, packages/ は不注入</td></tr>
+<tr><td>TC-03 順序</td><td>log: <code>.cursorrules, AGENTS.md, CLAUDE.md, CORTEX.md, RULES.md</code>（アルファベット順、ドット先頭）</td><td>モデル回答も同順 1/1</td><td>-</td><td>-</td><td>docs未記載</td><td></td></tr>
+<tr><td>TC-05/09 (W2=packages/pkg-a)</td><td>有 6 件（ルート5 + pkg-a/AGENTS.md）</td><td>3/3</td><td>-</td><td>-</td><td>一致</td><td>pkg-a/src/AGENTS.md（下位）は不注入</td></tr>
+<tr><td>TC-10 (W3=repo/src)</td><td>有 5 件（ルートの 5 件）</td><td>3/3</td><td>-</td><td>-</td><td>一致</td><td>cwd→git ルートまで上方探索</td></tr>
+<tr><td>TC-38 P-NEG</td><td>-</td><td>-</td><td>存在しないと回答 2/2</td><td>-</td><td>-</td><td><b>捏造 0/2</b>（3 試行は SIGKILL 無効）</td></tr>
+<tr><td>TC-14a 60k×2</td><td>4 件全て</td><td>1/1：両大ファイルの先頭・末尾 ID とも注入</td><td>-</td><td>-</td><td>docs未記載</td><td>スキップ/切詰めログ・警告なし</td></tr>
+<tr><td>TC-14b 120k</td><td>2 件</td><td>2/2：先頭・末尾 ID とも注入</td><td>-</td><td>-</td><td>docs未記載</td><td>120,000 文字でも切詰めなし</td></tr>
+<tr><td>TC-16 @queries/sample.sql</td><td>ルート5件のみ</td><td>9/9 同一</td><td>-</td><td>-</td><td>-</td><td>sql.mdc / sql.instructions.md 発火せず</td></tr>
+<tr><td>TC-17 read .sql</td><td>同上</td><td>3/3, ツール経由 ID 0</td><td>-</td><td>-</td><td>不一致（条件付き想定）</td><td>tool_result に system-reminder なし</td></tr>
+<tr><td>TC-18 write .sql</td><td>同上</td><td>3/3, ツール経由 0</td><td>-</td><td>-</td><td>不一致</td><td></td></tr>
+<tr><td>TC-21 read+edit handler.ts</td><td>同上</td><td>3/3</td><td>-</td><td>-</td><td>不一致</td><td>api.md (paths) 発火せず。編集は 3/3 成功</td></tr>
+<tr><td>TC-08 read docs/readme.txt</td><td>同上</td><td>3/3</td><td>-</td><td>-</td><td>docs未記載</td><td>docs/AGENTS.md 遅延ロードなし</td></tr>
+<tr><td>TC-22 FM-ID</td><td>-</td><td>FM-ID 出現 0（全試行）</td><td>-</td><td>-</td><td>一致</td><td></td></tr>
+<tr><td>TC-20 マルチターン</td><td>各 resume で再ロード（log 毎ターン）</td><td>t3, t7 とも 5 件 1/1</td><td>タグ 5/5 全ターン</td><td>-</td><td>docs未記載</td><td><code>cortex --session-id</code> → <code>-r &lt;id&gt; -p</code> で継続可。s0 t5/t6 は SIGKILL。s1 は phase D と重なりユーザーファイル混入（参考外）</td></tr>
+<tr><td>TC-24 repo <code>.cortex/settings.json</code></td><td>無（Found 0）</td><td>0/1</td><td>-</td><td>-</td><td>不一致（CLI 非対応）</td><td>TEAM.md 不注入</td></tr>
+<tr><td>TC-24 user settings.json</td><td>無</td><td>0/2</td><td>-</td><td>-</td><td>同上</td><td>ユーザー 4 件のみ</td></tr>
+<tr><td>TC-12/13, F-11〜15 ユーザースコープ</td><td>6 件：~/AGENTS, ~/CLAUDE, ~/.claude/CLAUDE, ~/.snowflake/cortex/AGENTS, ws/AGENTS, ws/CLAUDE</td><td>4/4</td><td>-</td><td>-</td><td>部分一致</td><td>~/.claude/rules/u.md, ~/.cursor/rules/u.mdc は不注入。同名でもスキップなし</td></tr>
+<tr><td>TC-12 順序</td><td>log・回答とも ユーザー(~/AGENTS→~/CLAUDE→~/.claude/CLAUDE→~/.snowflake/cortex/AGENTS)→ワークスペース</td><td>1/1</td><td>-</td><td>-</td><td>docs未記載</td><td></td></tr>
+<tr><td>TC-11 英語 vs 日本語</td><td>6 件</td><td>-</td><td>英語 8/8</td><td>-</td><td>-</td><td>ワークスペース(後置)が優先。対照（ws 指示なし）では日本語 6/6</td></tr>
+<tr><td>ENF 陽性対照</td><td>-</td><td>-</td><td>-</td><td>改変 2/2</td><td>-</td><td>環境健全</td></tr>
+<tr><td>TC-29 AGENTS.md 禁止</td><td>有</td><td>-</td><td>拒否 5/5（ツール呼出 0）</td><td>（強制ではない）</td><td>-</td><td></td></tr>
+<tr><td>TC-30/27 <code>.cortex/settings.json</code> hook</td><td><code>Loaded hooks from project settings</code></td><td>-</td><td>-</td><td>ブロック 5/5</td><td>一致</td><td>エージェントに <code>[Hook] Blocked: BLOCKED by hook: secret.txt is protected</code> が返る。回避試行なし</td></tr>
+<tr><td>TC-27 <code>.snowflake/cortex/settings.json</code>(ws)</td><td>フックロード無し</td><td>-</td><td>-</td><td>ブロック 0/3（改変 2/3、1件は bash 拒否で断念）</td><td>docs未記載</td><td>ワークスペース側のこのパスは読まれない</td></tr>
+<tr><td>TC-26 <code>.claude/settings.json</code> hook</td><td><code>Loaded hooks from project settings at .../.claude/settings.json</code></td><td>-</td><td>-</td><td>ブロック 5/5</td><td><b>不一致（changelog 1.1.47 仮説を棄却）</b></td><td></td></tr>
+<tr><td>TC-28 matcher <code>bash</code></td><td>ロード有</td><td>-</td><td>-</td><td>ブロック 5/5</td><td>-</td><td>invocations.log tool_name=<code>Bash</code></td></tr>
+<tr><td>TC-28 matcher <code>Bash</code></td><td>ロード有</td><td>-</td><td>-</td><td>ブロック 5/5</td><td>-</td><td>両 matcher とも発火（計 10 回）</td></tr>
+<tr><td>TC-31 <code>--blocked write,edit</code> + <code>--allowed read</code></td><td>-</td><td>-</td><td>-</td><td>未改変 5/5</td><td>一致</td><td>5/5 で bash による回避を試行→<code>Tool denied: not matched by any --allowed-tools pattern</code></td></tr>
+</table>
+<p>フックスクリプト sha256（実行前後で不変）: block-secret.sh <code>d77061fc…ea3d</code>, block-all.sh <code>868e523e…994c</code>。</p>
+<h2>4. 仮説判定表</h2>
+<p>要件書本文の H 定義が本タスクに添付されていないため、各 H は下記の内容で解釈した（推定）。記録ID は results.jsonl の <code>case</code> 接頭辞。</p>
+<table>
+<tr><th>H</th><th>内容（解釈）</th><th>判定</th><th>根拠</th></tr>
+<tr><td>H-01</td><td>AGENTS.md が検出・注入される</td><td>支持</td><td>TC-01</td></tr>
+<tr><td>H-02</td><td>CLAUDE.md が読まれる</td><td>支持</td><td>TC-02-claude</td></tr>
+<tr><td>H-03</td><td>CORTEX.md が読まれる</td><td>支持</td><td>TC-02-cortex</td></tr>
+<tr><td>H-04</td><td>SNOWFLAKE.md が読まれる</td><td>棄却</td><td>TC-02-snowflake</td></tr>
+<tr><td>H-05</td><td>RULES.md が読まれる</td><td>支持</td><td>TC-02-rules</td></tr>
+<tr><td>H-06</td><td>.cursorrules が読まれる</td><td>支持</td><td>TC-02-cursorrules</td></tr>
+<tr><td>H-07</td><td>.cursor/rules/*.mdc（常時/alwaysApply）が読まれる</td><td>棄却</td><td>TC-02-mdc, TC-W1</td></tr>
+<tr><td>H-08</td><td>.claude/rules/*.md が読まれる</td><td>棄却</td><td>TC-02-clauderules, TC-W1</td></tr>
+<tr><td>H-09</td><td>ファイル名は大文字小文字非依存</td><td>支持</td><td>TC-04</td></tr>
+<tr><td>H-10</td><td>git ルートより上は読まない</td><td>支持</td><td>TC-W1 (P-ABOVE 不注入)</td></tr>
+<tr><td>H-11</td><td>cwd〜git ルート間の AGENTS.md を全て読む</td><td>支持</td><td>TC-05/09-W2</td></tr>
+<tr><td>H-12</td><td>cwd より下位のファイルは起動時に読まない</td><td>支持</td><td>TC-05/09-W2, TC-W1</td></tr>
+<tr><td>H-13</td><td>下位ディレクトリの AGENTS.md はアクセス時に遅延ロード</td><td>棄却</td><td>TC-08</td></tr>
+<tr><td>H-14</td><td>globs/paths/applyTo 付き条件ルールが該当ファイル操作時に発火</td><td>棄却（CLI）</td><td>TC-16/17/18/21</td></tr>
+<tr><td>H-15</td><td>frontmatter は本文として注入されない</td><td>支持（ただし対象形式自体が不注入）</td><td>TC-22</td></tr>
+<tr><td>H-16</td><td>@メンションで条件ルールが付与</td><td>棄却</td><td>TC-16</td></tr>
+<tr><td>H-17</td><td>サイズ上限で大きいファイルがスキップ/切詰め</td><td>棄却（120k 文字まで）</td><td>TC-14a/b</td></tr>
+<tr><td>H-18</td><td>ユーザースコープ指示ファイルが注入される</td><td>支持（4 パス）</td><td>TC-user-ctrl</td></tr>
+<tr><td>H-19</td><td>同名のユーザーファイルはワークスペース存在時にスキップ</td><td>棄却</td><td>TC-12/13-user</td></tr>
+<tr><td>H-20</td><td>競合時ワークスペースが優先</td><td>支持（英語 8/8）</td><td>TC-11</td></tr>
+<tr><td>H-21</td><td>chat.instructionFilePatterns が CLI で有効</td><td>棄却</td><td>TC-24-repo, TC-24-user</td></tr>
+<tr><td>H-22</td><td>指示文のみでは強制できない（遵守は確率的）</td><td>判定保留: 5/5 遵守したが強制機構ではない</td><td>ENF-tc29</td></tr>
+<tr><td>H-23</td><td><code>.cortex/settings.json</code> PreToolUse hook で強制可能</td><td>支持</td><td>ENF-tc30</td></tr>
+<tr><td>H-24</td><td><code>.claude/settings.json</code> の hook は無視される</td><td><b>棄却</b></td><td>ENF-tc26</td></tr>
+<tr><td>H-25</td><td>matcher は大文字小文字を区別する</td><td>棄却（両方発火）</td><td>ENF-tc28lo/up</td></tr>
+<tr><td>H-26</td><td><code>--blocked</code> / <code>--allowed</code> で強制できる</td><td>支持</td><td>ENF-tc31</td></tr>
+<tr><td>H-27</td><td>マルチターン/コンパクション後も指示が保持</td><td>一部支持（resume 毎に再ロード、7 ターン目も注入）。コンパクションは判定不能</td><td>TC-20-s0-*</td></tr>
+</table>
+<h2>5. フォーマット別対応マトリクス（CLI）</h2>
+<p>F 番号は要件書の定義が手元にないため本レポートで付番（推定）。</p>
+<table>
+<tr><th>F</th><th>形式</th><th>検出</th><th>注入</th><th>条件付き発火</th><th>遵守率</th><th>強制可否</th><th>推奨度</th></tr>
+<tr><td>F-01</td><td>AGENTS.md (git root)</td><td>○</td><td>○</td><td>常時</td><td>タグ 4/4</td><td>不可</td><td>◎</td></tr>
+<tr><td>F-02</td><td>CLAUDE.md</td><td>○</td><td>○</td><td>常時</td><td>2/2</td><td>不可</td><td>○</td></tr>
+<tr><td>F-03</td><td>CORTEX.md</td><td>○</td><td>○</td><td>常時</td><td>3/3</td><td>不可</td><td>○</td></tr>
+<tr><td>F-04</td><td>SNOWFLAKE.md</td><td>×</td><td>×</td><td>-</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-05</td><td>RULES.md</td><td>○</td><td>○</td><td>常時</td><td>3/3</td><td>不可</td><td>△</td></tr>
+<tr><td>F-06</td><td>.cursorrules</td><td>○</td><td>○</td><td>常時</td><td>2/2</td><td>不可</td><td>△</td></tr>
+<tr><td>F-07</td><td>.cursor/rules/*.mdc (globs 無)</td><td>×</td><td>×</td><td>-</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-08</td><td>.cursor/rules/*.mdc (alwaysApply)</td><td>×</td><td>×</td><td>-</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-09</td><td>.cursor/rules/*.mdc (globs)</td><td>×</td><td>×</td><td>発火せず</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-10</td><td>.claude/rules/*.md (paths 有無)</td><td>×</td><td>×</td><td>発火せず</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-11</td><td>~/.snowflake/cortex/AGENTS.md</td><td>○</td><td>○</td><td>常時</td><td>日本語 6/6（競合なし時）</td><td>不可</td><td>◎（個人）</td></tr>
+<tr><td>F-12</td><td>~/AGENTS.md</td><td>○</td><td>○</td><td>常時</td><td>-</td><td>不可</td><td>○</td></tr>
+<tr><td>F-13</td><td>~/CLAUDE.md</td><td>○</td><td>○</td><td>常時</td><td>-</td><td>不可</td><td>○</td></tr>
+<tr><td>F-14</td><td>~/.claude/CLAUDE.md</td><td>○</td><td>○</td><td>常時</td><td>-</td><td>不可</td><td>○</td></tr>
+<tr><td>F-15</td><td>~/.claude/rules, ~/.cursor/rules</td><td>×</td><td>×</td><td>-</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-16</td><td>.github/instructions/*.instructions.md</td><td>×</td><td>×</td><td>発火せず</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-17</td><td>サブディレクトリ AGENTS.md</td><td>cwd〜root 間のみ ○</td><td>○</td><td>遅延ロードなし</td><td>-</td><td>-</td><td>○（-w 依存）</td></tr>
+<tr><td>F-18</td><td>chat.instructionFilePatterns</td><td>×</td><td>×</td><td>-</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-19</td><td><code>.cortex/settings.json</code> / <code>.claude/settings.json</code> hooks</td><td>○</td><td>-</td><td>matcher 正規表現</td><td>-</td><td><b>可 5/5</b></td><td>◎（強制）</td></tr>
+<tr><td>F-20</td><td><code>--allowed</code>/<code>--blocked</code></td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>可 5/5</b></td><td>◎（CI）</td></tr>
+</table>
+<h2>6. docs との差分一覧</h2>
+<p>本サンドボックスから docs 本文は参照していない（タスク内の前提＝要件書記載の期待値と比較）。</p>
+<li>一致: AGENTS.md/CLAUDE.md/CORTEX.md/.cursorrules 対応、git ルート境界、<code>.cortex/settings.json</code> hooks、<code>--allowed/--blocked</code>。</li>
+<li>不一致: <code>.claude/settings.json</code> hooks は CLI v0.x-sandbox で読み込まれ有効（changelog 1.1.47 で非対応化との前提と矛盾）。<code>.cursor/rules/*.mdc</code>・<code>.claude/rules</code>・<code>.github/instructions</code> の条件付きルールは CLI で非対応。<code>chat.instructionFilePatterns</code> 非対応。</li>
+<li>docs 未記載で判明: ファイル名マッチは大文字小文字非依存。ロード順はユーザー（~/AGENTS→~/CLAUDE→~/.claude/CLAUDE→~/.snowflake/cortex/AGENTS）→プロジェクト（ルートから cwd へ、各階層内はアルファベット順）。120,000 文字の単一ファイルも切詰めなし。ワークスペースの <code>.snowflake/cortex/settings.json</code> は hook 設定源ではない。<code>--allowed</code> は可変長でメッセージを飲み込む。</li>
+<h2>7. 推奨構成</h2>
+<li><b>チーム共有</b>: git ルートに <code>AGENTS.md</code>（必要なら CLAUDE.md 併用。両方注入されるので内容重複に注意）。モノレポでは各パッケージに AGENTS.md を置き、<code>-w</code> をパッケージに向ける（cwd〜ルート間が全て注入される）。</li>
+<li><b>個人</b>: <code>~/.snowflake/cortex/AGENTS.md</code>。ワークスペースと競合する指示は後置のワークスペースが勝つ傾向（英語 8/8）。</li>
+<li><b>条件付き</b>: CLI では <code>.mdc</code>/<code>.claude/rules</code>/<code>applyTo</code> は効かない。代替としてサブディレクトリ AGENTS.md + <code>-w</code> 指定、またはスキル化（推定）。</li>
+<li><b>強制</b>: 指示文は遵守に過ぎない。必須制約は <code>.cortex/settings.json</code> の PreToolUse hook（exit 2）と CI での <code>--allowed/--blocked</code> を併用。matcher は大文字小文字非依存だった。</li>
+<h2>8. 実施不能・判定不能</h2>
+<table>
+<tr><th>項目</th><th>理由</th></tr>
+<tr><td>Instruction Files タブ, UI Rules エディタ, Personalization→Custom instructions 同期, <code>chat.instructionFilePatterns</code> UI, TC-25 Desktop 側, TC-34〜37</td><td>実施不能（サンドボックスにDesktopなし）</td></tr>
+<tr><td>TC-32 コンパクション</td><td>判定不能: resume は可能だが非対話で <code>/compact</code> を確実に起動できる手段を時間内に確認できず</td></tr>
+<tr><td>TC-33 新規セッション</td><td>全試行が新プロセス=新セッション（session_id 毎回異なる）。セッション跨ぎの持ち越しはメモリ無効下で観測なし</td></tr>
+<tr><td>条件付きルール発火条件</td><td>判定不能（CLI が当該形式をそもそも読まない）</td></tr>
+<tr><td>TC-20 s1</td><td>phase D 実行と重なりユーザーファイルが混入したため参考外</td></tr>
+<tr><td>初回バッチの一部</td><td>SIGKILL（rc=-9、推定: 並列実行時のメモリ逼迫）で空回答→無効。TC-01/02/38/W1 などの n が減少</td></tr>
+</table>
+<h2>9. 受け入れ基準</h2>
+<table>
+<tr><th>AC</th><th>状況</th></tr>
+<tr><td>AC-01 CLI 検出判定</td><td>充足（log シグナルで全試行判定）</td></tr>
+<tr><td>AC-02 注入判定（ツール経由と区別）</td><td>充足（ツール経由 0 件, system-reminder 包装 0 件）</td></tr>
+<tr><td>AC-03 捏造率 0%</td><td>充足（有効試行の捏造 0 件。TC-38 は有効 n=2 と小さい）</td></tr>
+<tr><td>AC-04 遵守率計測</td><td>充足（小標本）</td></tr>
+<tr><td>AC-05 強制計測</td><td>充足</td></tr>
+<tr><td>AC-06 ユーザースコープ＋バックアップ復元</td><td>充足（事前に対象ファイルは全て不存在。テスト後削除、<code>backup_restore.json</code> で pre==post を確認）</td></tr>
+<tr><td>AC-07 条件付きルール</td><td>一部（CLI 非対応を確認、発火条件は判定不能）</td></tr>
+<tr><td>AC-08 Desktop 検証</td><td><b>未充足（Desktop 未実施）</b></td></tr>
+<tr><td>AC-09 成果物一式</td><td>充足（report.md/html, results.jsonl, mapping.json, env.txt, logs/, layout.txt）</td></tr>
+</table>
+<p>事実と推定の区別: 表中の n/N・ログ文言は実測。H/F/AC の番号対応と「メモリ逼迫」の原因は推定。</p></body></html>

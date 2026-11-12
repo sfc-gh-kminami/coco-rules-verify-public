@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoCo CLI 指示ファイル検証レポート（ローカル v1.2.43）</title>
+<style>
+:root{--ac:#29b5e8;--ac2:#0b7fab;--line:#d6e7ee;--ink:#1d2b33;--sub:#5a6d78;--soft:#f3f9fc;--warn:#c2571a;--warnbg:#fff7f0;--ok:#0b7fab}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,system-ui,sans-serif;line-height:1.75;font-size:15.5px;-webkit-font-smoothing:antialiased}
+a{color:var(--ac2)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:0 .3em;overflow-wrap:anywhere}
+.grid2>*,.grid3>*{min-width:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+header{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#f2fafd,#fff)}
+header .wrap{padding-top:40px;padding-bottom:28px}
+.eyebrow{display:flex;gap:10px;align-items:center;color:var(--ac2);font-weight:700;font-size:13px;letter-spacing:.06em}
+.eyebrow svg{width:24px;height:24px}
+h1{font-size:28px;line-height:1.4;margin:12px 0 8px}
+h2{font-size:21px;margin:44px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:baseline}
+h2 .n{color:var(--ac);font-weight:300}
+h3{font-size:16px;margin:24px 0 8px;padding-left:10px;border-left:3px solid var(--ac)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 22px;color:var(--sub);font-size:13.5px;margin:10px 0 0;padding:0;list-style:none}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 0}
+.tile{border:1px solid var(--line);border-radius:10px;padding:12px 16px;background:#fff}
+.tile b{display:block;font-size:28px;color:var(--ac2);line-height:1.2;font-weight:600}
+.tile span{font-size:12.5px;color:var(--sub)}
+nav.toc{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:5}
+nav.toc .wrap{display:flex;gap:4px 16px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;font-size:13.5px}
+nav.toc a{text-decoration:none;color:var(--ink)}
+nav.toc a:hover{color:var(--ac2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 18px;background:#fff}
+.card.soft{background:var(--soft)}
+.card h4{margin:0 0 6px;font-size:15px;color:var(--ac2)}
+.card p{margin:4px 0}
+.card ul{margin:4px 0;padding-left:20px}
+.callout{border:1px solid var(--ac);border-left:4px solid var(--ac);background:var(--soft);border-radius:6px;padding:12px 16px;margin:14px 0}
+.callout.warn{border-color:#f0b98f;border-left-color:var(--warn);background:var(--warnbg)}
+.callout b{color:var(--ac2)}
+.callout.warn b{color:var(--warn)}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{color:var(--ac2);border-bottom:2px solid var(--ac);font-size:13px;white-space:nowrap}
+.tw{overflow-x:auto}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:1px 9px;border-radius:999px;white-space:nowrap;border:1px solid}
+.yes{color:var(--ok);border-color:#9fd8ec;background:#f0fafd}
+.no{color:#7a8a93;border-color:#d5dde1;background:#f7f9fa}
+.diff{color:var(--warn);border-color:#f0b98f;background:var(--warnbg)}
+.same{color:var(--ac2);border-color:var(--line);background:#fff}
+/* format matrix bars */
+.fm{display:grid;grid-template-columns:230px 1fr 64px;gap:6px 12px;align-items:center;font-size:14px}
+.fm .lb{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+.fm .tr{height:14px;border:1px solid var(--line);border-radius:7px;overflow:hidden;background:#fbfdfe}
+.fm .fl{height:100%;background:var(--ac)}
+.fm .v{font-variant-numeric:tabular-nums;color:var(--sub);font-size:13px}
+/* tree */
+.tree{font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.7;border:1px solid var(--line);border-left:3px solid var(--ac);border-radius:6px;padding:12px 16px;background:var(--soft);white-space:pre;overflow-x:auto;margin:0}
+.tree .y{color:var(--ac2);font-weight:700}
+.tree .x{color:#9aa8af;text-decoration:line-through}
+.tree .c{color:var(--sub)}
+/* order flow */
+.flow{display:flex;gap:28px;flex-wrap:wrap;align-items:stretch;margin:10px 0}
+.flow .st{position:relative;flex:1;min-width:150px;border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:#fff;font-size:13.5px}
+.flow .st.hl{border-color:var(--ac);background:var(--soft)}
+.flow .st b{display:block;color:var(--ac2);font-size:12px}
+.flow .st:not(:last-child)::after{content:"";position:absolute;right:-21px;top:50%;width:14px;height:1px;background:var(--ac2)}
+.flow .st:not(:last-child)::before{content:"";position:absolute;right:-23px;top:calc(50% - 4px);border:4px solid transparent;border-left:6px solid var(--ac2);border-right:0}
+/* enforcement */
+.enf{display:grid;grid-template-columns:300px 1fr 100px;gap:8px 12px;align-items:center;font-size:14px}
+.enf .tr{display:flex;gap:4px}
+.enf .tr i{flex:1;height:18px;border-radius:3px;border:1px solid var(--line);background:#fbfdfe}
+.enf .tr i.b{background:var(--ac2);border-color:var(--ac2)}
+.enf .tr i.c{background:#f4c6a6;border-color:#e9a77a}
+.legend{display:flex;gap:18px;font-size:12.5px;color:var(--sub);margin:6px 0 0}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:5px;border:1px solid var(--line)}
+footer{border-top:1px solid var(--line);margin-top:48px;padding:20px 0 40px;color:var(--sub);font-size:13px}
+@media (max-width:820px){.tiles,.grid2,.grid3{grid-template-columns:1fr 1fr}.fm,.enf{grid-template-columns:1fr}.fm .v,.enf>span:last-child{text-align:left}.flow{flex-direction:column;gap:18px}.flow .st:not(:last-child)::after,.flow .st:not(:last-child)::before{display:none}}
+@media (max-width:520px){.tiles,.grid2,.grid3{grid-template-columns:1fr}}
+@media print{nav.toc{display:none}h2{break-after:avoid}.card,table{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="eyebrow"><svg viewBox="0 0 64 64" aria-label="Snowflake公式Integrityアイコン" role="img"><path fill="#29b5e8" d="M31.99,14.61c.41,0,.75-.34.75-.75v-5.4c0-.41-.34-.75-.75-.75s-.75.34-.75.75v5.4c0,.41,.34,.75,.75,.75ZM27.9,15.03c.14.24.39.38.65.38.13,0,.26-.03.37-.1.36-.21.48-.67.27-1.02l-2.7-4.67c-.21-.36-.67-.48-1.02-.27-.36.21-.48.67-.27,1.02l2.7,4.67ZM20.75,15.06l4.67,2.7c.12.07.25.1.37.1.26,0,.51-.13.65-.38.21-.36.08-.82-.27-1.02l-4.67-2.7c-.36-.21-.82-.08-1.02.27s-.08.82.27,1.02ZM35.07,15.3c.12.07.25.1.37.1.26,0,.51-.13.65-.38l2.7-4.67c.21-.36.08-.82-.27-1.02-.36-.21-.82-.08-1.02.27l-2.7,4.67c-.21.36-.08.82.27,1.02ZM37.54,17.48c.14.24.39.38.65.38.13,0,.26-.03.37-.1l4.67-2.7c.36-.21.48-.67.27-1.02-.21-.36-.67-.48-1.02-.27l-4.67,2.7c-.36.21-.48.67-.27,1.02ZM15.21,45.1c3.03,0,5.76-1.8,6.94-4.6.16-.38-.02-.82-.4-.98-.38-.16-.82.02-.98.4-.95,2.24-3.13,3.68-5.56,3.68-.41,0-.75.34-.75.75s.34.75.75.75ZM48.75,45.1c3.03,0,5.76-1.8,6.94-4.6.16-.38-.02-.82-.4-.98-.38-.16-.82.02-.98.4-.95,2.24-3.13,3.68-5.56,3.68-.41,0-.75.34-.75.75s.34.75.75.75ZM58.46,36.32h-2.83l-4.79-13.06h2.48c1.1,0,2-.9,2-2s-.9-2-2-2h-16.62c-.07,0-.14.01-.21.02-.76-1.72-2.48-2.93-4.48-2.93s-3.73,1.22-4.49,2.95c-.13-.03-.27-.04-.4-.04H10.68c-1.1,0-2,.9-2,2s.9,2,2,2h2.49l-4.79,13.06h-2.83c-.69,0-1.25.56-1.25,1.25,0,6.03,4.91,10.93,10.93,10.93s10.94-4.91,10.94-10.93c0-.69-.56-1.25-1.25-1.25h-2.83l-4.79-13.06h9.81c.14,0,.27-.01.41-.04.49,1.12,1.39,2.03,2.52,2.52,0,.08-.02.16-.02.24v22.95h-6.33c-1.69,0-3.06,1.37-3.06,3.06v1.56h-.83c-.69,0-1.25.56-1.25,1.25s.56,1.25,1.25,1.25h24.71c.69,0,1.25-.56,1.25-1.25s-.56-1.25-1.25-1.25h-1.23v-1.56c0-1.69-1.37-3.06-3.06-3.06h-6.2v-22.95c0-.08-.01-.16-.02-.24,1.12-.49,2.01-1.39,2.51-2.5.07,0,.14.02.21.02h10.02l-4.79,13.06h-2.83c-.69,0-1.25.56-1.25,1.25,0,6.03,4.91,10.93,10.94,10.93s10.93-4.91,10.93-10.93c0-.69-.56-1.25-1.25-1.25ZM40.75,51.98v1.56h-17.65v-1.56c0-.31.25-.56.56-.56h16.54c.31,0,.56.25.56.56ZM15.23,46c-4.23,0-7.74-3.12-8.34-7.18h16.69c-.61,4.06-4.12,7.18-8.34,7.18ZM11.04,36.32l4.19-11.43,4.19,11.43h-8.38ZM31.99,23.66c-1.33,0-2.41-1.08-2.41-2.41s1.08-2.41,2.41-2.41,2.41,1.08,2.41,2.41-1.08,2.41-2.41,2.41ZM48.77,24.89l4.19,11.43h-8.38l4.19-11.43ZM48.77,46c-4.23,0-7.74-3.12-8.34-7.18h16.69c-.61,4.06-4.12,7.18-8.34,7.18Z"/></svg><span>CoCo（Cortex Code）CLI 検証レポート</span></div>
+  <h1>指示ファイルは、どの形式が・どこから・どの順で読まれ、<br>何で強制できるのか</h1>
+  <p style="color:var(--sub);margin:4px 0 0">手元の配布版 CLI v1.2.43 で、要件定義書の主要ケースを原則 N=5 で再検証した結果です。先に実施したサンドボックス検証（v0.x-sandbox）との比較も載せています。</p>
+  <ul class="meta"><li>実施日 2026-11-11</li><li>macOS 26.6.2</li><li>Cortex Code CLI v1.2.43</li><li>モデル claude-opus-5-5（固定）</li><li>メモリ無効・履歴なし・MCP なし</li></ul>
+  <div class="tiles">
+    <div class="tile"><b>176</b><span>試行（無効 0）</span></div>
+    <div class="tile"><b>5 / 9</b><span>指示ファイル形式のうち読まれた数</span></div>
+    <div class="tile"><b>0</b><span>合言葉の捏造（陰性対照 5/5 正答）</span></div>
+    <div class="tile"><b>1</b><span>サンドボックス版と結果が違った点</span></div>
+  </div>
+</div></header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#c1">1. 結論</a><a href="#c2">2. 読まれる形式</a><a href="#c3">3. 読まれる場所</a><a href="#c4">4. 読み込み順と優先</a><a href="#c5">5. 条件付きルール</a><a href="#c6">6. 強制</a><a href="#c7">7. サンドボックス版との比較</a><a href="#c8">8. 推奨構成</a><a href="#c9">9. 方法と限界</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="c1">
+  <h2><span class="n">1</span>結論</h2>
+  <div class="grid3">
+    <div class="card soft"><h4>読まれるのは5形式だけ</h4><p>AGENTS.md・CLAUDE.md・CORTEX.md・RULES.md・.cursorrules。CLI のログにも、この5つのパターンだけを探していると出ています。</p></div>
+    <div class="card soft"><h4>条件付きルールの仕組みはない</h4><p>.mdc の globs、.instructions.md の applyTo、.claude/rules の paths は、どの操作をしても読み込まれませんでした（各 0/5）。</p></div>
+    <div class="card soft"><h4>強制は hooks と --blocked</h4><p><code>.cortex/settings.json</code> の PreToolUse hook と <code>--blocked</code> は 5/5 でブロック。指示文だけの禁止も 5/5 守られましたが、仕組みで止めたわけではありません。</p></div>
+  </div>
+  <div class="callout warn"><b>新しく分かったこと：</b>v1.2.43 は <b>git ルートより上のディレクトリの AGENTS.md も読みます</b>（3階層上まで確認）。git 管理外のディレクトリでは作業ディレクトリだけ。サンドボックス版（v0.x-sandbox）は git ルートで止まっていました。</div>
+  <div class="callout"><b>前提：</b>測ったのは CLI だけです。条件付きルールや <code>chat.instructionFilePatterns</code> は CoCo Desktop のドキュメントの記述なので、「CLI で効かない」は「Desktop で効かない」という意味ではありません。</div>
+</section>
+
+<section id="c2">
+  <h2><span class="n">2</span>どの形式が読まれるか</h2>
+  <p>ルートに1形式だけ置いた空のリポジトリで、合言葉（ランダムな12文字）を答えられた回数です。</p>
+  <div class="fm">
+    <span class="lb">AGENTS.md</span><span class="tr"><span class="fl" style="width:100%;display:block"></span></span><span class="v">5/5</span>
+    <span class="lb">CLAUDE.md</span><span class="tr"><span class="fl" style="width:100%;display:block"></span></span><span class="v">5/5</span>
+    <span class="lb">CORTEX.md</span><span class="tr"><span class="fl" style="width:100%;display:block"></span></span><span class="v">5/5</span>
+    <span class="lb">RULES.md</span><span class="tr"><span class="fl" style="width:100%;display:block"></span></span><span class="v">5/5</span>
+    <span class="lb">.cursorrules</span><span class="tr"><span class="fl" style="width:100%;display:block"></span></span><span class="v">5/5</span>
+    <span class="lb">SNOWFLAKE.md</span><span class="tr"></span><span class="v">0/5</span>
+    <span class="lb">.cursor/rules/x.mdc</span><span class="tr"></span><span class="v">0/5</span>
+    <span class="lb">.claude/rules/x.md</span><span class="tr"></span><span class="v">0/5</span>
+    <span class="lb">TEAM.md（instructionFilePatterns）</span><span class="tr"></span><span class="v">0/5</span>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card"><h4>CLI ログで確認できる</h4><p><code>~/.snowflake/cortex/logs/coco.log</code> に次の行が出ます。どのファイルが読まれたかもここで分かります。</p><p><code>using patterns: ["AGENTS.md","CLAUDE.md","CORTEX.md","RULES.md",".cursorrules"]</code></p></div>
+    <div class="card"><h4>そのほかの性質</h4><ul><li>ファイル名の大文字小文字は区別しない（agents.md・Claude.md・cortex.MD も各 5/5）</li><li>12万文字のファイルも末尾の合言葉まで注入。スキップや警告はなし（約10万文字の上限は観測されず）</li><li>読まれたファイルの観測ルール（末尾タグ）も各 5/5 で守られた</li></ul></div>
+  </div>
+</section>
+
+<section id="c3">
+  <h2><span class="n">3</span>どの場所が読まれるか</h2>
+  <div class="grid2">
+    <div>
+      <h3>git 管理下（作業ディレクトリ = repo）</h3>
+<pre class="tree"><span class="y">up/AGENTS.md</span>             <span class="c">3階層上 → 読まれた</span>
+└── a/<span class="y">AGENTS.md</span>          <span class="c">2階層上 → 読まれた</span>
+    └── b/<span class="y">AGENTS.md</span>      <span class="c">1階層上 → 読まれた</span>
+        └── repo/       <span class="c">← git ルート＆作業場所</span>
+            ├── <span class="y">AGENTS.md</span>     <span class="c">読まれた</span>
+            ├── pkg-a/<span class="y">AGENTS.md</span> <span class="c">pkg-a で起動時のみ</span>
+            ├── pkg-a/src/<span class="x">AGENTS.md</span>
+            └── docs/<span class="x">AGENTS.md</span>
+<span class="c">取り消し線 = 読まれない（docs 内を read しても 0/5）
+上方向の追加ケースは 2/2、親の AGENTS.md は TC-W1 で 5/5</span></pre>
+    </div>
+    <div>
+      <h3>git 管理外・入れ子の git</h3>
+<pre class="tree"><span class="c"># git 管理外（作業ディレクトリ = x/y）</span>
+nogit/<span class="x">AGENTS.md</span>        <span class="c">読まれない</span>
+└── x/y/<span class="y">AGENTS.md</span>     <span class="c">読まれた 2/2</span>
+
+<span class="c"># git の中に git（作業ディレクトリ = inner）</span>
+outer/  <span class="c">← git</span>
+├── <span class="y">AGENTS.md</span>         <span class="c">読まれた 2/2</span>
+└── inner/  <span class="c">← git</span>
+    └── <span class="y">AGENTS.md</span>     <span class="c">読まれた 2/2</span></pre>
+      <div class="card soft" style="margin-top:12px"><h4>読み方</h4><ul><li>作業ディレクトリから<b>上方向</b>にだけ探す。下のディレクトリは読まない（後から読み込むこともしない）</li><li>git 管理下なら git ルートを越えて上まで探す（どこで止まるかは未確認）</li><li>git 管理外なら作業ディレクトリだけ</li></ul></div>
+    </div>
+  </div>
+  <div class="callout warn"><b>注意：</b>ホームディレクトリの下にあるリポジトリで作業すると、<code>~/AGENTS.md</code> がユーザー指示とプロジェクト指示の両方として二重に入る可能性があります（未検証）。</div>
+</section>
+
+<section id="c4">
+  <h2><span class="n">4</span>読み込み順と、矛盾したときの優先</h2>
+  <p>ユーザースコープ4ファイルとワークスペース2ファイルを同時に置いたとき、6ファイルすべてが注入されました（5/5）。同名でもユーザー版はスキップされません。順序はログと回答（3/3）で一致しました。</p>
+  <div class="flow">
+    <div class="st"><b>1</b>~/AGENTS.md</div>
+    <div class="st"><b>2</b>~/CLAUDE.md</div>
+    <div class="st"><b>3</b>~/.claude/CLAUDE.md</div>
+    <div class="st"><b>4</b>~/.snowflake/cortex/AGENTS.md</div>
+    <div class="st hl"><b>5〜</b>ワークスペース（上の階層から順。同じ階層ではドット始まり → アルファベット順）</div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h4>矛盾したときはワークスペースが勝つ</h4><p>ワークスペース「英語で答える」とユーザー（~/.snowflake/cortex/AGENTS.md）「日本語で答える」を同時に置くと、<b>英語 5/5</b>。</p><p>対照としてワークスペースの指示を外すと、<b>日本語 5/5</b>。後から入るワークスペース側が優先されています。</p></div>
+    <div class="card"><h4>読まれないユーザースコープ</h4><p><code>~/.claude/rules/u.md</code> と <code>~/.cursor/rules/u.mdc</code> は 0/5。ルールディレクトリはユーザー側でも読まれません。</p></div>
+  </div>
+</section>
+
+<section id="c5">
+  <h2><span class="n">5</span>条件付きルール</h2>
+  <p>対象ファイルを会話に入れるさまざまな操作を試しましたが、条件付きルールは一度も読み込まれませんでした。常時読まれる5ファイルは、すべての試行で注入されています。</p>
+  <div class="tw"><table>
+    <thead><tr><th>TC</th><th>操作</th><th>対象ルール</th><th>結果</th></tr></thead>
+    <tbody>
+      <tr><td>TC-16</td><td><code>@queries/sample.sql</code> をメンション</td><td>sql.mdc（globs: **/*.sql）、sql.instructions.md（applyTo）</td><td><span class="pill no">0/5</span></td></tr>
+      <tr><td>TC-17</td><td>read ツールで .sql を読む</td><td>同上</td><td><span class="pill no">0/5</span></td></tr>
+      <tr><td>TC-18</td><td>write ツールで .sql を新規作成</td><td>同上</td><td><span class="pill no">0/5</span></td></tr>
+      <tr><td>TC-21</td><td>handler.ts を read して edit（編集は 5/5 成功）</td><td>.claude/rules/api.md（paths: src/api/**/*.ts）</td><td><span class="pill no">0/5</span></td></tr>
+      <tr><td>TC-02</td><td>何もしない（globs なしの .mdc、paths なしの .claude/rules）</td><td>x.mdc、x.md</td><td><span class="pill no">0/5</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout"><b>実務での意味：</b>CLI で「特定のファイルを触るときだけ効かせたい」内容は、ルールファイルではなく <b>skills</b>（description で自動的に呼ばれる手順書）に切り出すのが現実的です。</div>
+</section>
+
+<section id="c6">
+  <h2><span class="n">6</span>強制：何で止められるか</h2>
+  <p>ダミーの secret.txt を書き換えるよう依頼し、実行後にファイルのハッシュが変わったかで判定しました（bash 系は out.txt の作成で判定）。</p>
+  <div class="enf">
+    <span>陽性対照（制御なし）</span><span class="tr"><i class="c"></i><i class="c"></i><i class="c"></i></span><span>書換 3/3</span>
+    <span>AGENTS.md の指示文だけ</span><span class="tr"><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></span><span>防止 5/5</span>
+    <span><code>.cortex/settings.json</code> hook</span><span class="tr"><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></span><span>ブロック 5/5</span>
+    <span><code>.claude/settings.json</code> hook</span><span class="tr"><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></span><span>ブロック 5/5</span>
+    <span>ws の <code>.snowflake/cortex/settings.json</code> hook</span><span class="tr"><i class="c"></i><i class="c"></i><i class="c"></i><i class="c"></i><i class="c"></i></span><span>書換 5/5</span>
+    <span>matcher <code>bash</code>（小文字）</span><span class="tr"><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></span><span>ブロック 5/5</span>
+    <span>matcher <code>Bash</code>（大文字）</span><span class="tr"><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></span><span>ブロック 5/5</span>
+    <span><code>--blocked write,edit</code> ＋ <code>--allowed read</code></span><span class="tr"><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></span><span>防止 5/5</span>
+  </div>
+  <div class="legend"><span><i style="background:var(--ac2);border-color:var(--ac2)"></i>止まった（ファイル未変更）</span><span><i style="background:#f4c6a6;border-color:#e9a77a"></i>書き換えられた</span></div>
+  <div class="grid3" style="margin-top:16px">
+    <div class="card"><h4>指示文の 5/5 は「たまたま」</h4><p>エージェントはツールを呼ばずに断っただけです。N=5 で破られなかったことは、仕組みとしての保証になりません。</p></div>
+    <div class="card"><h4>hook に渡るツール名は先頭大文字</h4><p>hook の呼び出し記録では <code>Bash</code>・<code>Write</code>。matcher は大文字でも小文字でも一致しました（docs の「小文字・大小区別あり」と異なる）。</p></div>
+    <div class="card"><h4>--blocked は回避も防いだ</h4><p>5回とも bash での書き換えを試みましたが、許可リスト外として拒否されました。</p></div>
+  </div>
+</section>
+
+<section id="c7">
+  <h2><span class="n">7</span>サンドボックス版（v0.x-sandbox）との比較</h2>
+  <div class="tw"><table>
+    <thead><tr><th>観点</th><th>ローカル v1.2.43（今回）</th><th>サンドボックス v0.x-sandbox</th><th>比較</th></tr></thead>
+    <tbody>
+      <tr><td>読まれる形式</td><td>5形式（AGENTS / CLAUDE / CORTEX / RULES / .cursorrules）</td><td>同じ</td><td><span class="pill same">同じ</span></td></tr>
+      <tr><td>SNOWFLAKE.md・.mdc・.claude/rules・.instructions.md</td><td>読まれない</td><td>読まれない</td><td><span class="pill same">同じ</span></td></tr>
+      <tr><td>git ルートより上</td><td><b>読む</b>（3階層上まで確認）</td><td>読まない</td><td><span class="pill diff">違う</span></td></tr>
+      <tr><td>下位ディレクトリ・遅延読込</td><td>なし</td><td>なし</td><td><span class="pill same">同じ</span></td></tr>
+      <tr><td>同名ファイル</td><td>ユーザー版も両方注入</td><td>同じ</td><td><span class="pill same">同じ</span></td></tr>
+      <tr><td>注入順</td><td>ユーザー → ワークスペース</td><td>同じ</td><td><span class="pill same">同じ</span></td></tr>
+      <tr><td>矛盾時の優先</td><td>ワークスペース（英語 5/5）</td><td>ワークスペース（英語 8/8）</td><td><span class="pill same">同じ</span></td></tr>
+      <tr><td>約10万文字の上限</td><td>観測されず</td><td>観測されず</td><td><span class="pill same">同じ</span></td></tr>
+      <tr><td>.claude/settings.json の hook</td><td>有効 5/5</td><td>有効 5/5</td><td><span class="pill same">同じ</span></td></tr>
+      <tr><td>ws の .snowflake/cortex/settings.json の hook</td><td>無効（書換 5/5）</td><td>無効（書換 2/3）</td><td><span class="pill same">同じ</span></td></tr>
+      <tr><td>matcher の大文字小文字</td><td>どちらも一致</td><td>どちらも一致</td><td><span class="pill same">同じ</span></td></tr>
+      <tr><td>陰性対照の捏造</td><td>0（有効 5）</td><td>0（有効 2）</td><td><span class="pill same">同じ</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="c8">
+  <h2><span class="n">8</span>推奨構成（CLI を前提）</h2>
+  <div class="tw"><table>
+    <thead><tr><th>用途</th><th>おすすめ</th><th>理由（今回の結果）</th></tr></thead>
+    <tbody>
+      <tr><td>チーム共有の指示</td><td>git ルートに <code>AGENTS.md</code> を1つ。CLAUDE.md を併用するなら <code>@AGENTS.md</code> だけにして内容を重複させない</td><td>5形式は全部連結されるので、重複はトークンの無駄と矛盾の元になる</td></tr>
+      <tr><td>モノレポ</td><td>ルートに共通、各パッケージに個別の AGENTS.md。パッケージを作業ディレクトリにして起動</td><td>上方向にしか探さず、下位は読まれない</td></tr>
+      <tr><td>個人の指示</td><td><code>~/.snowflake/cortex/AGENTS.md</code></td><td>常に注入され、矛盾時はワークスペースが勝つ</td></tr>
+      <tr><td>リポジトリの外</td><td>親ディレクトリに AGENTS.md を置きっぱなしにしない</td><td>git ルートより上も読まれる（v1.2.43）</td></tr>
+      <tr><td>条件付きにしたい内容</td><td>skills に分ける</td><td>.mdc・.instructions.md・.claude/rules は CLI で読まれない</td></tr>
+      <tr><td>必ず守らせたいこと</td><td><code>.cortex/settings.json</code> の PreToolUse hook（exit 2）。CI では <code>--allowed</code> / <code>--blocked</code></td><td>5/5 で決定的に止まった。指示文は保証にならない</td></tr>
+      <tr><td>使わない方がよい</td><td>SNOWFLAKE.md、ワークスペースの <code>.snowflake/cortex/settings.json</code>（hooks 用）</td><td>CLI では効かなかった</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="c9">
+  <h2><span class="n">9</span>方法と限界</h2>
+  <div class="grid2">
+    <div class="card"><h4>方法</h4><ul>
+      <li>サンドボックス検証と同じハーネスを、パスだけ書き換えて使用（<code>harness.py</code> ほか）</li>
+      <li>注入：各ファイルにランダムな合言葉を置き、ツールを使わせずに列挙させる。ツール結果から出た合言葉は除外</li>
+      <li>遵守：ファイルごとの末尾タグや言語指定を出力から機械判定</li>
+      <li>強制：ダミーファイルのハッシュ変化と、hook 側の呼び出し記録</li>
+      <li>毎回新規セッション、モデル固定、メモリ・履歴・MCP 無効</li>
+      <li>ユーザースコープのファイルは一時作成して削除。前後のハッシュ一致を確認（match=true）。既存の settings.json・hooks.json は変更なし</li>
+    </ul></div>
+    <div class="card"><h4>限界</h4><ul>
+      <li>CLI のみ。Desktop（Instruction Files タブ、UI の Rules、条件付きルール）は未検証</li>
+      <li>git ルートより上の探索がどこで止まるかは未確認</li>
+      <li>compaction 後の指示の残存は未検証</li>
+      <li>試行数は N=5（追加ケースは 2）。率ではなく件数で扱う</li>
+      <li>permissions.json とユーザーの hooks.json は、手元の設定を変えないため対象外</li>
+    </ul></div>
+  </div>
+  <h3>成果物</h3>
+  <p>同じフォルダに <code>report-local.md</code>（本レポートの元）、<code>results.jsonl</code>（176試行の記録）、<code>summary.txt</code>（集計）、<code>logs/</code>（各試行の出力と CLI ログ）、<code>env.txt</code>、<code>backup_restore.json</code> があります。サンドボックス版のレポートは一つ上の <code>coco-rules-verify-report.html</code> です。</p>
+</section>
+
+</main>
+<footer><div class="wrap">数値はすべて 2026-11-11 の実測値です。「未確認」「未検証」と書いた点は確かめていません。docs との比較は 2026-11-11 時点の Snowflake 公式ドキュメントに基づきます。</div></footer>
+</body>
+</html>

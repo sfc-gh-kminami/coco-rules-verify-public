@@ -1,0 +1,25 @@
+{
+ "pre": {
+  ".snowflake/cortex/AGENTS.md": null,
+  "AGENTS.md": null,
+  "CLAUDE.md": null,
+  ".claude/CLAUDE.md": null,
+  ".claude/rules": null,
+  ".cursor/rules": null,
+  ".claude/settings.json": null,
+  ".snowflake/cortex/settings.json": null,
+  ".snowflake/cortex/hooks.json": null
+ },
+ "post": {
+  ".snowflake/cortex/AGENTS.md": null,
+  "AGENTS.md": null,
+  "CLAUDE.md": null,
+  ".claude/CLAUDE.md": null,
+  ".claude/rules": null,
+  ".cursor/rules": null,
+  ".claude/settings.json": null,
+  ".snowflake/cortex/settings.json": null,
+  ".snowflake/cortex/hooks.json": null
+ },
+ "match": true
+}

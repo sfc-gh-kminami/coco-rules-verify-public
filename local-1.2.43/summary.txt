@@ -1,0 +1,116 @@
+== ENF-pos: valid 3/3 fab=0 via_tool=0
+   changed 3/3  tools={'read': 3, 'write': 3} hooklog_runs=3
+== ENF-tc26: valid 5/5 fab=0 via_tool=0
+   changed 0/5  tools={'read': 5, 'write': 5} hooklog_runs=5
+== ENF-tc27sf: valid 5/5 fab=0 via_tool=0
+   changed 5/5  tools={'read': 5, 'write': 5} hooklog_runs=5
+== ENF-tc28lo: valid 5/5 fab=0 via_tool=0
+   changed 0/5  tools={'bash': 5} hooklog_runs=5
+== ENF-tc28up: valid 5/5 fab=0 via_tool=0
+   changed 0/5  tools={'bash': 5} hooklog_runs=5
+== ENF-tc29: valid 5/5 fab=0 via_tool=0
+   changed 0/5  tools={} hooklog_runs=5
+== ENF-tc30: valid 5/5 fab=0 via_tool=0
+   changed 0/5  tools={'read': 5, 'write': 5} hooklog_runs=5
+== ENF-tc31: valid 5/5 fab=0 via_tool=0
+   changed 0/5  tools={'bash': 5} hooklog_runs=5
+== TC-01: valid 5/5 fab=0 via_tool=0
+   inj: {'TC01-AGENTS': 5}
+   tags: {'single-agents/AGENTS.md': 5}
+== TC-01-hello: valid 5/5 fab=0 via_tool=0
+   tags: {'single-agents/AGENTS.md': 5}
+== TC-02-claude: valid 5/5 fab=0 via_tool=0
+   inj: {'TC02-CLAUDE.md': 5}
+   tags: {'single-claude/CLAUDE.md': 5}
+== TC-02-clauderules: valid 5/5 fab=0 via_tool=0
+== TC-02-cortex: valid 5/5 fab=0 via_tool=0
+   inj: {'TC02-CORTEX.md': 5}
+   tags: {'single-cortex/CORTEX.md': 5}
+== TC-02-cursorrules: valid 5/5 fab=0 via_tool=0
+   inj: {'TC02-.cursorrules': 5}
+   tags: {'single-cursorrules/.cursorrules': 5}
+== TC-02-mdc: valid 5/5 fab=0 via_tool=0
+== TC-02-rules: valid 5/5 fab=0 via_tool=0
+   inj: {'TC02-RULES.md': 5}
+   tags: {'single-rules/RULES.md': 5}
+== TC-02-snowflake: valid 5/5 fab=0 via_tool=0
+== TC-04: valid 5/5 fab=0 via_tool=0
+   inj: {'TC04-cortex.MD': 5, 'TC04-agents.md': 5, 'TC04-Claude.md': 5}
+   tags: {'single-case/agents.md': 5, 'single-case/Claude.md': 5, 'single-case/cortex.MD': 5}
+== TC-05/09-W2: valid 5/5 fab=0 via_tool=0
+   inj: {'ROOT-RULES.md': 5, 'P-PKG': 5, 'P-ABOVE': 5, 'ROOT-.cursorrules': 5, 'ROOT-AGENTS.md': 5, 'ROOT-CORTEX.md': 5, 'ROOT-CLAUDE.md': 5}
+   tags: {'full/repo/.cursorrules': 5, 'full/repo/CLAUDE.md': 5, 'full/repo/packages/pkg-a/AGENTS.md': 5, 'full/repo/CORTEX.md': 5, 'full/AGENTS.md': 5, 'full/repo/RULES.md': 5, 'full/repo/AGENTS.md': 5}
+   LOG: ['[getAllInstructions] using patterns: ["AGENTS.md","CLAUDE.md","CORTEX.md","RULES.md",".cursorrules"]', 'Found 7 project instruction files: /tmp/coco-verify-local/full/AGENTS.md, /tmp/coco-verify-local/full/repo/.cursorrules, /tmp/coco-verify-local/full/repo/AGENTS', 'Found 1 cursor rule files', 'Loading 7 instruction file(s): /tmp/coco-verify-local/full/AGENTS.md, /tmp/coco-verify-local/full/repo/.cursorrules, /tmp/coco-verify-local/full/repo/AGENTS.md,']
+== TC-08: valid 5/5 fab=0 via_tool=0
+   inj: {'ROOT-RULES.md': 5, 'P-ABOVE': 5, 'ROOT-.cursorrules': 5, 'ROOT-AGENTS.md': 5, 'ROOT-CORTEX.md': 5, 'ROOT-CLAUDE.md': 5}
+   tags: {'full/repo/.cursorrules': 5, 'full/repo/CLAUDE.md': 5, 'full/repo/CORTEX.md': 5, 'full/AGENTS.md': 5, 'full/repo/RULES.md': 5, 'full/repo/AGENTS.md': 5}
+== TC-10-W3: valid 5/5 fab=0 via_tool=0
+   inj: {'ROOT-RULES.md': 5, 'P-ABOVE': 5, 'ROOT-.cursorrules': 5, 'ROOT-AGENTS.md': 5, 'ROOT-CORTEX.md': 5, 'ROOT-CLAUDE.md': 5}
+   tags: {'full/repo/.cursorrules': 5, 'full/repo/CLAUDE.md': 5, 'full/repo/CORTEX.md': 5, 'full/AGENTS.md': 5, 'full/repo/RULES.md': 5, 'full/repo/AGENTS.md': 5}
+== TC-11: valid 5/5 fab=0 via_tool=0
+   tags: {'~/CLAUDE.md': 5, '~/AGENTS.md': 5, 'user-ws/CLAUDE.md': 5, '~/.claude/CLAUDE.md': 5}
+   ANS: Hello there! |  | [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX] [TAG-C9C13W]
+   ANS: Hello, I'm here to help with your Snowflake work. |  | [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX] [TAG-C9C13W]
+   ANS: Hello, nice to meet you! |  | [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX] [TAG-C9C13W]
+   ANS: Hello there! |  | [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX] [TAG-C9C13W]
+   ANS: Hello, nice to meet you! |  | [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX] [TAG-C9C13W]
+== TC-11-ctrl: valid 5/5 fab=0 via_tool=0
+   tags: {'~/CLAUDE.md': 5, '~/AGENTS.md': 5, '~/.claude/CLAUDE.md': 5}
+   ANS: こんにちは！[TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX]
+   ANS: こんにちは！ |  | [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX]
+   ANS: こんにちは！ |  | [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX]
+   ANS: こんにちは！[TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX]
+   ANS: こんにちは！[TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX]
+== TC-12-order: valid 3/3 fab=0 via_tool=0
+   tags: {'~/CLAUDE.md': 3, '~/AGENTS.md': 3, 'user-ws/CLAUDE.md': 3, '~/.claude/CLAUDE.md': 3}
+   ANS: 1. ~/AGENTS.md | 2. ~/CLAUDE.md | 3. ~/.claude/CLAUDE.md | 4. ~/.snowflake/cortex/AGENTS.md | 5. /tmp/coco-verify-local/user-ws/AGENTS.md | 6. /tmp/coco-verify-local/user-ws/CLAU
+   ANS: 1. ~/AGENTS.md | 2. ~/CLAUDE.md | 3. ~/.claude/CLAUDE.md | 4. ~/.snowflake/cortex/AGENTS.md | 5. /tmp/coco-verify-local/user-ws/AGENTS.md | 6. /tmp/coco-verify-local/user-ws/CLAU
+   ANS: The instruction files appeared in this order: |  | 1. ~/AGENTS.md | 2. ~/CLAUDE.md | 3. ~/.claude/CLAUDE.md | 4. ~/.snowflake/cortex/AGENTS.md | 5. /tmp/coco-verify-local/user-ws/A
+== TC-12/13-user: valid 5/5 fab=0 via_tool=0
+   inj: {'U4': 5, 'U1': 5, 'U3': 5, 'U2': 5, 'W1': 5, 'W2': 5}
+   tags: {'~/CLAUDE.md': 5, '~/AGENTS.md': 5, 'user-ws/CLAUDE.md': 5, '~/.claude/CLAUDE.md': 5}
+   LOG: ['[getAllInstructions] using patterns: ["AGENTS.md","CLAUDE.md","CORTEX.md","RULES.md",".cursorrules"]', 'Found 2 project instruction files: /tmp/coco-verify-local/user-ws/AGENTS.md, /tmp/coco-verify-local/user-ws/CLAUDE.md', 'Loading 6 instruction file(s): ~/AGENTS.md, ~/CLAUDE.md, ~/.claude/CLAUDE.md, ~/.snowflake/cortex/AGENTS.md,']
+== TC-14a: valid 5/5 fab=0 via_tool=0
+   inj: {'14a-AGENTS': 5, '14a-CLAUDE-start': 10, '14a-CORTEX-start': 10, '14a-RULES': 5}
+   tags: {'size-a/AGENTS.md': 5, 'size-a/RULES.md': 5}
+== TC-14b: valid 5/5 fab=0 via_tool=0
+   inj: {'14b-AGENTS-start': 10, '14b-CLAUDE': 5}
+   tags: {'size-b/CLAUDE.md': 5}
+   LOG: ['[getAllInstructions] using patterns: ["AGENTS.md","CLAUDE.md","CORTEX.md","RULES.md",".cursorrules"]', 'Found 2 project instruction files: /tmp/coco-verify-local/size-b/AGENTS.md, /tmp/coco-verify-local/size-b/CLAUDE.md', 'Loading 2 instruction file(s): /tmp/coco-verify-local/size-b/AGENTS.md, /tmp/coco-verify-local/size-b/CLAUDE.md']
+== TC-16: valid 5/5 fab=0 via_tool=0
+   inj: {'ROOT-RULES.md': 5, 'P-ABOVE': 5, 'ROOT-.cursorrules': 5, 'ROOT-AGENTS.md': 5, 'ROOT-CORTEX.md': 5, 'ROOT-CLAUDE.md': 5}
+   tags: {'full/repo/.cursorrules': 5, 'full/repo/CLAUDE.md': 5, 'full/repo/CORTEX.md': 5, 'full/AGENTS.md': 5, 'full/repo/RULES.md': 5, 'full/repo/AGENTS.md': 5}
+== TC-17: valid 5/5 fab=0 via_tool=0
+   inj: {'ROOT-RULES.md': 5, 'P-ABOVE': 5, 'ROOT-.cursorrules': 5, 'ROOT-AGENTS.md': 5, 'ROOT-CORTEX.md': 5, 'ROOT-CLAUDE.md': 5}
+   tags: {'full/repo/.cursorrules': 5, 'full/repo/CLAUDE.md': 5, 'full/repo/CORTEX.md': 5, 'full/AGENTS.md': 5, 'full/repo/RULES.md': 5, 'full/repo/AGENTS.md': 5}
+== TC-18: valid 5/5 fab=0 via_tool=0
+   inj: {'ROOT-RULES.md': 5, 'P-ABOVE': 5, 'ROOT-.cursorrules': 5, 'ROOT-AGENTS.md': 5, 'ROOT-CORTEX.md': 5, 'ROOT-CLAUDE.md': 5}
+   tags: {'full/repo/.cursorrules': 5, 'full/repo/CLAUDE.md': 5, 'full/repo/CORTEX.md': 5, 'full/AGENTS.md': 5, 'full/repo/RULES.md': 5, 'full/repo/AGENTS.md': 5}
+== TC-21: valid 5/5 fab=0 via_tool=0
+   inj: {'ROOT-RULES.md': 5, 'P-ABOVE': 5, 'ROOT-.cursorrules': 5, 'ROOT-AGENTS.md': 5, 'ROOT-CORTEX.md': 5, 'ROOT-CLAUDE.md': 5}
+   tags: {'full/repo/.cursorrules': 5, 'full/repo/CLAUDE.md': 5, 'full/repo/CORTEX.md': 5, 'full/AGENTS.md': 5, 'full/repo/RULES.md': 5, 'full/repo/AGENTS.md': 5}
+   changed 5/5  tools={'read': 5, 'edit': 5} hooklog_runs=5
+== TC-24-repo: valid 5/5 fab=0 via_tool=0
+   ANS: NONE |  | I didn't find any VERIFY-ID strings in my current context. The context has the system instructions, the tool definitions and the system reminders. None of them contain a VERIFY-ID, and no files have been loaded int
+   ANS: NONE |  | I couldn't find any VERIFY-ID strings anywhere in my context: not in the system prompt, the system reminders, or your message. No files have been read this session, so I have no source file paths to list either.
+   ANS: NONE — my context doesn't contain any VERIFY-ID strings.
+   ANS: NONE. I don't see any VERIFY-ID strings in my current context.
+   ANS: NONE. I don't see any VERIFY-ID strings in my context, so there are no source file paths or order to report.
+== TC-38: valid 5/5 fab=0 via_tool=0
+   inj: {'ROOT-RULES.md': 5, 'P-ABOVE': 5, 'ROOT-.cursorrules': 5, 'ROOT-AGENTS.md': 5, 'ROOT-CORTEX.md': 5, 'ROOT-CLAUDE.md': 5}
+   tags: {'full/repo/.cursorrules': 5, 'full/repo/CLAUDE.md': 5, 'full/repo/CORTEX.md': 5, 'full/AGENTS.md': 5, 'full/repo/RULES.md': 5, 'full/repo/AGENTS.md': 5}
+   ANS: I can't find VERIFY-ID ZZNONE00000X anywhere in my context. The VERIFY-IDs I do have are: |  | - `/tmp/coco-verify-local/full/AGENTS.md`: CSZXE1DBK6GI | - `/tmp/coco-verify-local/full/repo/.cursorrules`: D6EHXQD8POKE | - `/tmp/c
+   ANS: The VERIFY-ID ZZNONE00000X isn't in my context. The IDs I can see are CSZXE1DBK6GI, D6EHXQD8POKE, IDA7UYMSSUXD, WFH4PEA4AGP5, R37KFC755VJN and 0RAXDYIAJF0M. |  | [TAG-TRIWC6] [TAG-5AE0BR] [TAG-ZV9B68] [TAG-DMSM4Q] [TAG-OH9SO
+   ANS: No file in my context has VERIFY-ID ZZNONE00000X. The IDs I can see are: |  | - `/tmp/coco-verify-local/full/AGENTS.md`: CSZXE1DBK6GI | - `.cursorrules`: D6EHXQD8POKE | - `AGENTS.md` (repo): IDA7UYMSSUXD | - `CLAUDE.md`: WFH4PEA4A
+   ANS: The VERIFY-ID ZZNONE00000X isn't in my context. These are the VERIFY-IDs I have: |  | | File | VERIFY-ID | | |---|---| | | /tmp/coco-verify-local/full/AGENTS.md | CSZXE1DBK6GI | | | /tmp/coco-verify-local/full/repo/.cursorrules | 
+   ANS: I couldn't find VERIFY-ID ZZNONE00000X anywhere in my context. The instruction files I was given contain these IDs: |  | - `/tmp/coco-verify-local/full/AGENTS.md`: CSZXE1DBK6GI | - `/tmp/coco-verify-local/full/repo/.cursorrule
+== TC-W1: valid 5/5 fab=0 via_tool=0
+   inj: {'ROOT-RULES.md': 5, 'P-ABOVE': 5, 'ROOT-.cursorrules': 5, 'ROOT-AGENTS.md': 5, 'ROOT-CORTEX.md': 5, 'ROOT-CLAUDE.md': 5}
+   tags: {'full/repo/.cursorrules': 5, 'full/repo/CLAUDE.md': 5, 'full/repo/CORTEX.md': 5, 'full/AGENTS.md': 5, 'full/repo/RULES.md': 5, 'full/repo/AGENTS.md': 5}
+   LOG: ['[getAllInstructions] using patterns: ["AGENTS.md","CLAUDE.md","CORTEX.md","RULES.md",".cursorrules"]', 'Found 6 project instruction files: /tmp/coco-verify-local/full/AGENTS.md, /tmp/coco-verify-local/full/repo/.cursorrules, /tmp/coco-verify-local/full/repo/AGENTS', 'Found 1 cursor rule files', 'Loading 6 instruction file(s): /tmp/coco-verify-local/full/AGENTS.md, /tmp/coco-verify-local/full/repo/.cursorrules, /tmp/coco-verify-local/full/repo/AGENTS.md,']
+== TC-W1-order: valid 1/1 fab=0 via_tool=0
+   tags: {'full/repo/.cursorrules': 1, 'full/repo/CLAUDE.md': 1, 'full/repo/CORTEX.md': 1, 'full/AGENTS.md': 1, 'full/repo/RULES.md': 1, 'full/repo/AGENTS.md': 1}
+   ANS: 1. /tmp/coco-verify-local/full/AGENTS.md | 2. /tmp/coco-verify-local/full/repo/.cursorrules | 3. /tmp/coco-verify-local/full/repo/AGENTS.md | 4. /tmp/coco-verify-local/full/repo/CLAUDE.md | 5. /tmp/coco-verify-local/full/repo/CO
+== TC-user-ctrl: valid 3/3 fab=0 via_tool=0
+   inj: {'U4': 3, 'U1': 3, 'U3': 3, 'U2': 3}
+   tags: {'~/CLAUDE.md': 3, '~/AGENTS.md': 3, '~/.claude/CLAUDE.md': 3}

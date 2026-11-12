@@ -1,0 +1,22 @@
+TC-12_13-user-5805120-1 ['~/.claude/CLAUDE.md', '~/.snowflake/cortex/AGENTS.md', '~/CLAUDE.md', '~/AGENTS.md', '/tmp/coco-verify-local/user-ws/AGENTS.md', '/tmp/coco-verify-local/user-ws/CLAUDE.md'] These are the VERIFY-ID strings in my context, listed in the order they appear: 
+TC-12_13-user-5805120-2 ['~/.claude/CLAUDE.md', '~/.snowflake/cortex/AGENTS.md', '~/CLAUDE.md', '~/AGENTS.md', '/tmp/coco-verify-local/user-ws/AGENTS.md', '/tmp/coco-verify-local/user-ws/CLAUDE.md'] These are the VERIFY-ID strings in my context, in the order they appear:  1. `EC
+TC-12_13-user-5805122-3 ['~/.claude/CLAUDE.md', '~/.snowflake/cortex/AGENTS.md', '~/CLAUDE.md', '~/AGENTS.md', '/tmp/coco-verify-local/user-ws/AGENTS.md', '/tmp/coco-verify-local/user-ws/CLAUDE.md'] These are the VERIFY-ID strings in my context, in the order they appear:  1. `EC
+TC-12_13-user-5834240-4 ['~/.claude/CLAUDE.md', '~/.snowflake/cortex/AGENTS.md', '~/CLAUDE.md', '~/AGENTS.md', '/tmp/coco-verify-local/user-ws/AGENTS.md', '/tmp/coco-verify-local/user-ws/CLAUDE.md'] These are the VERIFY-ID strings in my context, listed in the order they appear: 
+TC-12_13-user-5834286-5 ['~/.claude/CLAUDE.md', '~/.snowflake/cortex/AGENTS.md', '~/CLAUDE.md', '~/AGENTS.md', '/tmp/coco-verify-local/user-ws/AGENTS.md', '/tmp/coco-verify-local/user-ws/CLAUDE.md'] Here are the VERIFY-IDs in the order they appear in my context:  1. `EC64MOEIBB1
+TC-12-order-5842196-6 [] 1. ~/AGENTS.md 2. ~/CLAUDE.md 3. ~/.claud
+TC-12-order-5857913-7 [] 1. ~/AGENTS.md 2. ~/CLAUDE.md 3. ~/.claud
+TC-12-order-5863461-8 [] The instruction files appeared in this order:  1. ~/AGENTS.md 2. /U
+TC-11-5866808-9 [] Hello there!  [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX] [TAG-C9C13W]
+TC-11-5887014-10 [] Hello, I'm here to help with your Snowflake work.  [TAG-B4N96V] [TAG-5JKFHL] [TA
+TC-11-5891628-11 [] Hello, nice to meet you!  [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX] [TAG-C9C13W]
+TC-11-5896706-12 [] Hello there!  [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX] [TAG-C9C13W]
+TC-11-5916733-13 [] Hello, nice to meet you!  [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX] [TAG-C9C13W]
+TC-user-ctrl-5925269-14 ['~/.claude/CLAUDE.md', '~/.snowflake/cortex/AGENTS.md', '~/CLAUDE.md', '~/AGENTS.md'] コンテキスト内に、次の順序で4つのVERIFY-IDがあります。  1. `EC64MOEIBB1T` — `~/AGENTS.md`
+TC-user-ctrl-5931478-15 ['~/.claude/CLAUDE.md', '~/.snowflake/cortex/AGENTS.md', '~/CLAUDE.md', '~/AGENTS.md'] コンテキスト内のVERIFY-IDを、出現した順に示します。  1. `EC64MOEIBB1T`: `~/AGENTS.md` 2.
+TC-user-ctrl-5949944-16 ['~/.claude/CLAUDE.md', '~/.snowflake/cortex/AGENTS.md', '~/CLAUDE.md', '~/AGENTS.md'] コンテキスト内のVERIFY-IDは、出現順に以下の4つです。  1. `EC64MOEIBB1T`: `~/AGENTS.md` 2
+TC-11-ctrl-5950412-17 [] こんにちは！[TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX]
+TC-11-ctrl-5952475-18 [] こんにちは！  [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX]
+TC-11-ctrl-5973380-19 [] こんにちは！  [TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX]
+TC-11-ctrl-5975770-20 [] こんにちは！[TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX]
+TC-11-ctrl-5978181-21 [] こんにちは！[TAG-B4N96V] [TAG-5JKFHL] [TAG-XW1DXX]
+restore match True

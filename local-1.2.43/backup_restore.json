@@ -1,0 +1,25 @@
+{
+ "pre": {
+  ".snowflake/cortex/AGENTS.md": null,
+  "AGENTS.md": null,
+  "CLAUDE.md": null,
+  ".claude/CLAUDE.md": null,
+  ".claude/rules": null,
+  ".cursor/rules": null,
+  ".claude/settings.json": null,
+  ".snowflake/cortex/settings.json": "4b35835718a72f6f21585e6feaee77ecb1123c66d8ee516b2745811d57e2fa46",
+  ".snowflake/cortex/hooks.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+ },
+ "post": {
+  ".snowflake/cortex/AGENTS.md": null,
+  "AGENTS.md": null,
+  "CLAUDE.md": null,
+  ".claude/CLAUDE.md": null,
+  ".claude/rules": null,
+  ".cursor/rules": null,
+  ".claude/settings.json": null,
+  ".snowflake/cortex/settings.json": "4b35835718a72f6f21585e6feaee77ecb1123c66d8ee516b2745811d57e2fa46",
+  ".snowflake/cortex/hooks.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+ },
+ "match": true
+}

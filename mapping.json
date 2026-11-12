@@ -1,0 +1,454 @@
+{
+ "ids": {
+  "2USGLQLOAASH": {
+   "path": "/tmp/coco-verify/single-agents/AGENTS.md",
+   "label": "TC01-AGENTS",
+   "kind": "body"
+  },
+  "5ED2NZK72G93": {
+   "path": "/tmp/coco-verify/single-claude/CLAUDE.md",
+   "label": "TC02-CLAUDE.md",
+   "kind": "body"
+  },
+  "20LH9TF90TKZ": {
+   "path": "/tmp/coco-verify/single-cortex/CORTEX.md",
+   "label": "TC02-CORTEX.md",
+   "kind": "body"
+  },
+  "C3IY5VUTYLEU": {
+   "path": "/tmp/coco-verify/single-snowflake/SNOWFLAKE.md",
+   "label": "TC02-SNOWFLAKE.md",
+   "kind": "body"
+  },
+  "ZTZB2I4R1YU6": {
+   "path": "/tmp/coco-verify/single-rules/RULES.md",
+   "label": "TC02-RULES.md",
+   "kind": "body"
+  },
+  "YTPHY6LQ1WA8": {
+   "path": "/tmp/coco-verify/single-cursorrules/.cursorrules",
+   "label": "TC02-.cursorrules",
+   "kind": "body"
+  },
+  "P0O4GBFBKGNX": {
+   "path": "/tmp/coco-verify/single-mdc/.cursor/rules/x.mdc",
+   "label": "TC02-.cursor/rules/x.mdc",
+   "kind": "body"
+  },
+  "03IDV2NEJJFU": {
+   "path": "/tmp/coco-verify/single-mdc/.cursor/rules/x.mdc",
+   "label": "TC02-.cursor/rules/x.mdc",
+   "kind": "frontmatter"
+  },
+  "9983R8PSKEHK": {
+   "path": "/tmp/coco-verify/single-clauderules/.claude/rules/x.md",
+   "label": "TC02-.claude/rules/x.md",
+   "kind": "body"
+  },
+  "VH781P8RBPGO": {
+   "path": "/tmp/coco-verify/single-clauderules/.claude/rules/x.md",
+   "label": "TC02-.claude/rules/x.md",
+   "kind": "frontmatter"
+  },
+  "2CMEJ767CYAB": {
+   "path": "/tmp/coco-verify/single-case/agents.md",
+   "label": "TC04-agents.md",
+   "kind": "body"
+  },
+  "TK06NU42G2U0": {
+   "path": "/tmp/coco-verify/single-case/Claude.md",
+   "label": "TC04-Claude.md",
+   "kind": "body"
+  },
+  "HVHRAVVMK7KT": {
+   "path": "/tmp/coco-verify/single-case/cortex.MD",
+   "label": "TC04-cortex.MD",
+   "kind": "body"
+  },
+  "2B8BJI4BEDFH": {
+   "path": "/tmp/coco-verify/full/AGENTS.md",
+   "label": "P-ABOVE",
+   "kind": "body"
+  },
+  "9X491344NMMY": {
+   "path": "/tmp/coco-verify/full/repo/AGENTS.md",
+   "label": "ROOT-AGENTS.md",
+   "kind": "body"
+  },
+  "N8SJDHSFPFMV": {
+   "path": "/tmp/coco-verify/full/repo/CLAUDE.md",
+   "label": "ROOT-CLAUDE.md",
+   "kind": "body"
+  },
+  "5EW6MR22GAHA": {
+   "path": "/tmp/coco-verify/full/repo/CORTEX.md",
+   "label": "ROOT-CORTEX.md",
+   "kind": "body"
+  },
+  "JGJA5C7Y00RE": {
+   "path": "/tmp/coco-verify/full/repo/SNOWFLAKE.md",
+   "label": "ROOT-SNOWFLAKE.md",
+   "kind": "body"
+  },
+  "Y2JEJ7GZSWXL": {
+   "path": "/tmp/coco-verify/full/repo/RULES.md",
+   "label": "ROOT-RULES.md",
+   "kind": "body"
+  },
+  "NCI3CK8DJDS7": {
+   "path": "/tmp/coco-verify/full/repo/.cursorrules",
+   "label": "ROOT-.cursorrules",
+   "kind": "body"
+  },
+  "U688FJZRZHM1": {
+   "path": "/tmp/coco-verify/full/repo/.cursor/rules/always.mdc",
+   "label": "mdc-always",
+   "kind": "body"
+  },
+  "XMCRKC7BW946": {
+   "path": "/tmp/coco-verify/full/repo/.cursor/rules/always.mdc",
+   "label": "mdc-always",
+   "kind": "frontmatter"
+  },
+  "IRWTVHV4IY4B": {
+   "path": "/tmp/coco-verify/full/repo/.cursor/rules/sql.mdc",
+   "label": "mdc-sql",
+   "kind": "body"
+  },
+  "AC522FP0TXSA": {
+   "path": "/tmp/coco-verify/full/repo/.cursor/rules/sql.mdc",
+   "label": "mdc-sql",
+   "kind": "frontmatter"
+  },
+  "T6Y8B414LXS3": {
+   "path": "/tmp/coco-verify/full/repo/.cursor/rules/flag.mdc",
+   "label": "mdc-flag",
+   "kind": "body"
+  },
+  "X0VVAWVOM89C": {
+   "path": "/tmp/coco-verify/full/repo/.cursor/rules/flag.mdc",
+   "label": "mdc-flag",
+   "kind": "frontmatter"
+  },
+  "V3FN3APN5BD8": {
+   "path": "/tmp/coco-verify/full/repo/.claude/rules/plain.md",
+   "label": "claude-plain",
+   "kind": "body"
+  },
+  "LK7C5CYU8EWZ": {
+   "path": "/tmp/coco-verify/full/repo/.claude/rules/plain.md",
+   "label": "claude-plain",
+   "kind": "frontmatter"
+  },
+  "GP7YCNMIVWTE": {
+   "path": "/tmp/coco-verify/full/repo/.claude/rules/api.md",
+   "label": "claude-api",
+   "kind": "body"
+  },
+  "RKTA6187F8K1": {
+   "path": "/tmp/coco-verify/full/repo/.claude/rules/api.md",
+   "label": "claude-api",
+   "kind": "frontmatter"
+  },
+  "N1A7F2T1SV63": {
+   "path": "/tmp/coco-verify/full/repo/.github/instructions/sql.instructions.md",
+   "label": "gh-sql",
+   "kind": "body"
+  },
+  "658VDC7HR4IV": {
+   "path": "/tmp/coco-verify/full/repo/.github/instructions/sql.instructions.md",
+   "label": "gh-sql",
+   "kind": "frontmatter"
+  },
+  "3EF7JZ7J7OL5": {
+   "path": "/tmp/coco-verify/full/repo/docs/AGENTS.md",
+   "label": "P-DOCS",
+   "kind": "body"
+  },
+  "5JJDN76CGT82": {
+   "path": "/tmp/coco-verify/full/repo/packages/pkg-a/AGENTS.md",
+   "label": "P-PKG",
+   "kind": "body"
+  },
+  "4JXKQOENWAIY": {
+   "path": "/tmp/coco-verify/full/repo/packages/pkg-a/src/AGENTS.md",
+   "label": "P-PKGSRC",
+   "kind": "body"
+  },
+  "3ULK1OQC2XL9": {
+   "path": "/tmp/coco-verify/size-a/AGENTS.md",
+   "label": "14a-AGENTS",
+   "kind": "body"
+  },
+  "O09YKCPLK2FK": {
+   "path": "/tmp/coco-verify/size-a/CLAUDE.md",
+   "label": "14a-CLAUDE-start",
+   "kind": "body"
+  },
+  "68ORVVN101XP": {
+   "path": "/tmp/coco-verify/size-a/CLAUDE.md",
+   "label": "14a-CLAUDE-end",
+   "kind": "body"
+  },
+  "R3M537A7B45M": {
+   "path": "/tmp/coco-verify/size-a/CORTEX.md",
+   "label": "14a-CORTEX-start",
+   "kind": "body"
+  },
+  "N2H1IQQEWWU3": {
+   "path": "/tmp/coco-verify/size-a/CORTEX.md",
+   "label": "14a-CORTEX-end",
+   "kind": "body"
+  },
+  "KEVNPV6F7HM3": {
+   "path": "/tmp/coco-verify/size-a/RULES.md",
+   "label": "14a-RULES",
+   "kind": "body"
+  },
+  "CXLXL8DOLWOE": {
+   "path": "/tmp/coco-verify/size-b/AGENTS.md",
+   "label": "14b-AGENTS-start",
+   "kind": "body"
+  },
+  "1N7XUIGY9EE9": {
+   "path": "/tmp/coco-verify/size-b/AGENTS.md",
+   "label": "14b-AGENTS-end",
+   "kind": "body"
+  },
+  "I9L4EL3L6ON8": {
+   "path": "/tmp/coco-verify/size-b/CLAUDE.md",
+   "label": "14b-CLAUDE",
+   "kind": "body"
+  },
+  "NOT57P2NK5MD": {
+   "path": "/tmp/coco-verify/single-team/TEAM.md",
+   "label": "TC24-TEAM",
+   "kind": "body"
+  },
+  "7YZO0TKC22GB": {
+   "path": "~/.snowflake/cortex/AGENTS.md",
+   "label": "U1",
+   "kind": "body"
+  },
+  "G73CU0U65PN5": {
+   "path": "~/AGENTS.md",
+   "label": "U2",
+   "kind": "body"
+  },
+  "YIT63Y764IKQ": {
+   "path": "~/CLAUDE.md",
+   "label": "U3",
+   "kind": "body"
+  },
+  "03SG7G9XPTE9": {
+   "path": "~/.claude/CLAUDE.md",
+   "label": "U4",
+   "kind": "body"
+  },
+  "Y4N7GDAXK51S": {
+   "path": "~/.claude/rules/u.md",
+   "label": "U5",
+   "kind": "body"
+  },
+  "JO6QDN0HF3M0": {
+   "path": "~/.claude/rules/u.md",
+   "label": "U5",
+   "kind": "frontmatter"
+  },
+  "NK2BBRWQSCKY": {
+   "path": "~/.cursor/rules/u.mdc",
+   "label": "U6",
+   "kind": "body"
+  },
+  "3FRP2WFFHFZZ": {
+   "path": "~/.cursor/rules/u.mdc",
+   "label": "U6",
+   "kind": "frontmatter"
+  },
+  "NHNVEB4J0F5O": {
+   "path": "/tmp/coco-verify/user-ws/AGENTS.md",
+   "label": "W1",
+   "kind": "body"
+  },
+  "0Y471BIFYJT7": {
+   "path": "/tmp/coco-verify/user-ws/CLAUDE.md",
+   "label": "W2",
+   "kind": "body"
+  },
+  "X486FNVR6MZM": {
+   "path": "/tmp/coco-verify/user-team/TEAM.md",
+   "label": "TC24-user-TEAM",
+   "kind": "body"
+  },
+  "E52GZ8BFMFK7": {
+   "path": "~/.snowflake/cortex/AGENTS.md",
+   "label": "U1",
+   "kind": "body"
+  },
+  "YT9AVI5AVZUM": {
+   "path": "~/AGENTS.md",
+   "label": "U2",
+   "kind": "body"
+  },
+  "Z8XMSUIVUGGR": {
+   "path": "~/CLAUDE.md",
+   "label": "U3",
+   "kind": "body"
+  },
+  "DFAJ951OI1LM": {
+   "path": "~/.claude/CLAUDE.md",
+   "label": "U4",
+   "kind": "body"
+  },
+  "JAX28YOLDQ1M": {
+   "path": "~/.claude/rules/u.md",
+   "label": "U5",
+   "kind": "body"
+  },
+  "561IQZUTCOFU": {
+   "path": "~/.claude/rules/u.md",
+   "label": "U5",
+   "kind": "frontmatter"
+  },
+  "P9O8TBW5AROB": {
+   "path": "~/.cursor/rules/u.mdc",
+   "label": "U6",
+   "kind": "body"
+  },
+  "0YVB6BWMP63M": {
+   "path": "~/.cursor/rules/u.mdc",
+   "label": "U6",
+   "kind": "frontmatter"
+  },
+  "Z4NR0BRIY3MQ": {
+   "path": "/tmp/coco-verify/user-ws/AGENTS.md",
+   "label": "W1",
+   "kind": "body"
+  },
+  "4IRH0HWT4QYJ": {
+   "path": "/tmp/coco-verify/user-ws/CLAUDE.md",
+   "label": "W2",
+   "kind": "body"
+  },
+  "W40OU961PH7D": {
+   "path": "/tmp/coco-verify/user-team/TEAM.md",
+   "label": "TC24-user-TEAM",
+   "kind": "body"
+  },
+  "G5AG99VZXTJ9": {
+   "path": "~/.snowflake/cortex/AGENTS.md",
+   "label": "U1",
+   "kind": "body"
+  },
+  "OYU4PFU4YS38": {
+   "path": "~/AGENTS.md",
+   "label": "U2",
+   "kind": "body"
+  },
+  "ET84VK3VCD9K": {
+   "path": "~/CLAUDE.md",
+   "label": "U3",
+   "kind": "body"
+  },
+  "YMO0Q5YXWJ87": {
+   "path": "~/.claude/CLAUDE.md",
+   "label": "U4",
+   "kind": "body"
+  },
+  "1SYAJ6T1XMV1": {
+   "path": "~/.claude/rules/u.md",
+   "label": "U5",
+   "kind": "body"
+  },
+  "LXGQ8S2P7W96": {
+   "path": "~/.claude/rules/u.md",
+   "label": "U5",
+   "kind": "frontmatter"
+  },
+  "NUHSZG75LC25": {
+   "path": "~/.cursor/rules/u.mdc",
+   "label": "U6",
+   "kind": "body"
+  },
+  "WMQF5HPYKKAB": {
+   "path": "~/.cursor/rules/u.mdc",
+   "label": "U6",
+   "kind": "frontmatter"
+  },
+  "NBUQP1SL3OHO": {
+   "path": "/tmp/coco-verify/user-ws/AGENTS.md",
+   "label": "W1",
+   "kind": "body"
+  },
+  "LDUONN32E522": {
+   "path": "/tmp/coco-verify/user-ws/CLAUDE.md",
+   "label": "W2",
+   "kind": "body"
+  },
+  "I5IY1N7P9IKG": {
+   "path": "/tmp/coco-verify/user-team/TEAM.md",
+   "label": "TC24-user-TEAM",
+   "kind": "body"
+  }
+ },
+ "tags": {
+  "OU4MSX": "/tmp/coco-verify/single-agents/AGENTS.md",
+  "AM7PMX": "/tmp/coco-verify/single-claude/CLAUDE.md",
+  "88IUHD": "/tmp/coco-verify/single-cortex/CORTEX.md",
+  "SE26S4": "/tmp/coco-verify/single-snowflake/SNOWFLAKE.md",
+  "47G10X": "/tmp/coco-verify/single-rules/RULES.md",
+  "YD47MR": "/tmp/coco-verify/single-cursorrules/.cursorrules",
+  "3MTGFE": "/tmp/coco-verify/single-mdc/.cursor/rules/x.mdc",
+  "82JH6A": "/tmp/coco-verify/single-clauderules/.claude/rules/x.md",
+  "GU8W8A": "/tmp/coco-verify/single-case/agents.md",
+  "EE8SV9": "/tmp/coco-verify/single-case/Claude.md",
+  "LY13OV": "/tmp/coco-verify/single-case/cortex.MD",
+  "9T3BYE": "/tmp/coco-verify/full/AGENTS.md",
+  "CL9WWJ": "/tmp/coco-verify/full/repo/AGENTS.md",
+  "I6NCYT": "/tmp/coco-verify/full/repo/CLAUDE.md",
+  "XA7TX3": "/tmp/coco-verify/full/repo/CORTEX.md",
+  "21MXW7": "/tmp/coco-verify/full/repo/SNOWFLAKE.md",
+  "62OKWQ": "/tmp/coco-verify/full/repo/RULES.md",
+  "BH7YGS": "/tmp/coco-verify/full/repo/.cursorrules",
+  "6ED4KO": "/tmp/coco-verify/full/repo/.cursor/rules/always.mdc",
+  "2CC6IL": "/tmp/coco-verify/full/repo/.cursor/rules/sql.mdc",
+  "7D4NS9": "/tmp/coco-verify/full/repo/.cursor/rules/flag.mdc",
+  "B6CH6Y": "/tmp/coco-verify/full/repo/.claude/rules/plain.md",
+  "U67E5W": "/tmp/coco-verify/full/repo/.claude/rules/api.md",
+  "SGC1VY": "/tmp/coco-verify/full/repo/.github/instructions/sql.instructions.md",
+  "RSILQ0": "/tmp/coco-verify/full/repo/docs/AGENTS.md",
+  "8OSHUA": "/tmp/coco-verify/full/repo/packages/pkg-a/AGENTS.md",
+  "38MDI9": "/tmp/coco-verify/full/repo/packages/pkg-a/src/AGENTS.md",
+  "RDDZR7": "/tmp/coco-verify/size-a/AGENTS.md",
+  "LSEV6F": "/tmp/coco-verify/size-a/RULES.md",
+  "1254PO": "/tmp/coco-verify/size-b/CLAUDE.md",
+  "D2HI9K": "/tmp/coco-verify/single-team/TEAM.md",
+  "23OEUO": "~/.snowflake/cortex/AGENTS.md",
+  "CICT8Y": "~/AGENTS.md",
+  "M4D1B7": "~/CLAUDE.md",
+  "RRG1NF": "~/.claude/CLAUDE.md",
+  "EWYY7Q": "~/.claude/rules/u.md",
+  "4UIIXV": "~/.cursor/rules/u.mdc",
+  "KZK4GJ": "/tmp/coco-verify/user-ws/AGENTS.md",
+  "XPVPM7": "/tmp/coco-verify/user-ws/CLAUDE.md",
+  "PL2K6N": "/tmp/coco-verify/user-team/TEAM.md",
+  "GKSN0R": "~/.snowflake/cortex/AGENTS.md",
+  "5DVGZX": "~/AGENTS.md",
+  "9CO7G8": "~/CLAUDE.md",
+  "KAAML7": "~/.claude/CLAUDE.md",
+  "KG4F9U": "~/.claude/rules/u.md",
+  "8FUH9B": "~/.cursor/rules/u.mdc",
+  "MLG2O1": "/tmp/coco-verify/user-ws/AGENTS.md",
+  "1BGG7Y": "/tmp/coco-verify/user-ws/CLAUDE.md",
+  "T8OPH9": "/tmp/coco-verify/user-team/TEAM.md",
+  "0ZUS2P": "~/.snowflake/cortex/AGENTS.md",
+  "HUE3HA": "~/AGENTS.md",
+  "C7HRM1": "~/CLAUDE.md",
+  "W62YNA": "~/.claude/CLAUDE.md",
+  "6LW3WO": "~/.claude/rules/u.md",
+  "M0CKZ6": "~/.cursor/rules/u.mdc",
+  "GJ1ZC6": "/tmp/coco-verify/user-ws/AGENTS.md",
+  "8JZ9K1": "/tmp/coco-verify/user-ws/CLAUDE.md",
+  "0202DL": "/tmp/coco-verify/user-team/TEAM.md"
+ }
+}

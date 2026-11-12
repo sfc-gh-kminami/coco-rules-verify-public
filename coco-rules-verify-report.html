@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoCo 指示ファイル（ルール）検出・遵守 検証レポート</title>
+<style>
+:root{--blue:#29B5E8;--navy:#11567F;--ink:#1f2933;--muted:#5f6b7a;--line:#dfe5ec;--bg:#f6f9fc;
+--ok:#1e8e3e;--okbg:#e6f4ea;--ng:#c5221f;--ngbg:#fce8e6;--na:#8a6d00;--nabg:#fef7e0;--grbg:#eef1f5}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP","Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:15px}
+header{background:linear-gradient(120deg,var(--navy),var(--blue));color:#fff;padding:40px 24px 32px}
+header .wrap{max-width:1120px;margin:0 auto}
+header h1{margin:0 0 8px;font-size:26px;line-height:1.4}
+header p{margin:0;opacity:.92}
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:5}
+nav .wrap{max-width:1120px;margin:0 auto;padding:8px 24px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px}
+nav a{color:var(--navy);text-decoration:none}
+nav a:hover{text-decoration:underline}
+main{max-width:1120px;margin:0 auto;padding:24px}
+section{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 28px;margin:0 0 20px}
+h2{margin:0 0 16px;font-size:20px;color:var(--navy);border-left:5px solid var(--blue);padding-left:10px}
+h3{font-size:16px;margin:22px 0 8px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 4px}
+th,td{border:1px solid var(--line);padding:7px 9px;vertical-align:top;text-align:left}
+th{background:var(--grbg);font-weight:600;white-space:nowrap}
+tbody tr:nth-child(even) td{background:#fbfcfe}
+code{font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;background:#f0f3f7;padding:1px 5px;border-radius:4px}
+.b{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;white-space:nowrap}
+.ok{background:var(--okbg);color:var(--ok)}.ng{background:var(--ngbg);color:var(--ng)}.na{background:var(--nabg);color:var(--na)}.gr{background:var(--grbg);color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:4px 0 18px}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:#fff}
+.card .n{font-size:28px;font-weight:700;color:var(--navy);line-height:1.2}
+.card .l{font-size:12.5px;color:var(--muted)}
+.key{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+.kp{border-radius:10px;padding:14px 16px;border:1px solid var(--line)}
+.kp h4{margin:0 0 6px;font-size:14.5px}
+.kp.ok{background:var(--okbg);border-color:#bfe3c8;color:var(--ink)}
+.kp.ng{background:var(--ngbg);border-color:#f3c5c1;color:var(--ink)}
+.kp.na{background:var(--nabg);border-color:#f1dfa1;color:var(--ink)}
+.kp ul{margin:0;padding-left:18px}
+.note{background:#f4f8fb;border-left:4px solid var(--blue);padding:10px 14px;border-radius:4px;margin:12px 0;font-size:13.5px}
+.warn{background:var(--nabg);border-left:4px solid #e0b100;padding:10px 14px;border-radius:4px;margin:12px 0;font-size:13.5px}
+.small{font-size:12.5px;color:var(--muted)}
+.flow{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch;margin:10px 0}
+.flow div{flex:1;min-width:150px;border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fff;font-size:13px}
+.flow div b{display:block;color:var(--navy)}
+footer{max-width:1120px;margin:0 auto;padding:8px 24px 40px;color:var(--muted);font-size:12px}
+@media print{nav{display:none}section{break-inside:avoid}body{background:#fff}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>CoCo 指示ファイル（ルール）検出・注入・遵守・強制 検証レポート</h1>
+<p>Cortex Code CLI 実測結果 ／ 2026-11-11 実施 ／ 要件定義書「2026-11-11-coco-rules-verification-requirements.md」準拠</p>
+</div></header>
+<nav><div class="wrap">
+<a href="#summary">1. 結論</a><a href="#env">2. 実施環境・方法</a><a href="#tc">3. ケース集計</a><a href="#h">4. 仮説判定</a><a href="#f">5. 対応マトリクス</a><a href="#diff">6. docs との差分</a><a href="#rec">7. 推奨構成</a><a href="#gap">8. 未実施・限界</a><a href="#ac">9. 受け入れ基準</a>
+</div></nav>
+<main>
+
+<section id="summary">
+<h2>1. 結論</h2>
+<div class="cards">
+<div class="card"><div class="n">146</div><div class="l">試行（サンドボックス）＋ローカル照合 2</div></div>
+<div class="card"><div class="n">45</div><div class="l">ケース（サブケース含む）</div></div>
+<div class="card"><div class="n">0</div><div class="l">ID 捏造件数（有効試行中）</div></div>
+<div class="card"><div class="n">23</div><div class="l">無効試行（プロセス強制終了による空回答）</div></div>
+</div>
+<div class="key">
+<div class="kp ok"><h4>docs 通りだった点</h4><ul>
+<li><code>AGENTS.md</code>・<code>CLAUDE.md</code>・<code>CORTEX.md</code>・<code>RULES.md</code>・<code>.cursorrules</code> は常に注入される</li>
+<li>ファイル名の大文字小文字は区別されない</li>
+<li>作業ディレクトリ〜gitルート間を上方向に探索（モノレポ対応）。gitルートより上は読まない</li>
+<li>指示が矛盾した場合はワークスペース側が優先（英語 8/8）</li>
+<li><code>.cortex/settings.json</code> の PreToolUse hook（exit 2）と <code>--blocked</code> は 5/5 でブロック</li>
+</ul></div>
+<div class="kp ng"><h4>docs と異なった点（CLI）</h4><ul>
+<li><code>SNOWFLAKE.md</code>、<code>.cursor/rules/*.mdc</code>、<code>.claude/rules/*.md</code>、<code>.github/instructions/*.instructions.md</code>、<code>chat.instructionFilePatterns</code> は読まれない</li>
+<li>同名のユーザー版（<code>~/AGENTS.md</code> など）もスキップされず両方注入</li>
+<li>注入順はユーザー → ワークスペース（docs はワークスペースが先）</li>
+<li>約10万文字の上限は観測されず（12万文字の単一ファイルも全文注入）</li>
+<li><code>.claude/settings.json</code> の hook は<b>有効</b>（changelog 1.1.47 と矛盾）</li>
+<li>hook matcher は <code>bash</code>・<code>Bash</code> の両方で発火。hook に渡る tool_name は <code>Bash</code> / <code>Read</code>（先頭大文字）</li>
+</ul></div>
+<div class="kp na"><h4>判定できなかった点</h4><ul>
+<li>Desktop 側全般（Instruction Files タブ、UI の Rules、Custom instructions 同期）</li>
+<li>条件付きルールの発火条件（CLI が対象形式を読まないため発火しようがない）</li>
+<li>compaction 後の指示の残存</li>
+<li>指示文だけの禁止が破られるケース（N=5 では破られず）</li>
+</ul></div>
+</div>
+<div class="warn"><b>前提:</b> 測ったのは <b>CLI のみ</b>です。Desktop docs に書かれた仕様（<code>.mdc</code> の globs、<code>applyTo</code>、<code>chat.instructionFilePatterns</code> など）が Desktop で効くかどうかは、今回は確かめていません。各ケースの有効試行は 1〜5 回と少ないため、率ではなく件数（n/N）で示します。</div>
+</section>
+
+<section id="env">
+<h2>2. 実施環境・方法</h2>
+<table>
+<tr><th>項目</th><th>サンドボックス（主測定）</th><th>ローカル（照合）</th></tr>
+<tr><td>実行基盤</td><td>Snowflake AGENT TASK サンドボックス（<code>[CLOUD-AUTOMATION-TASK]</code>、1回だけ実行）</td><td>macOS（検証者の PC）</td></tr>
+<tr><td>CLI</td><td>Cortex Code <b>v0.x-sandbox</b>（<code>/usr/local/bin/cortex</code>）</td><td>Cortex Code <b>v1.2.43</b>（作業中に 1.2.37 から自動更新されたため実体パスで固定）</td></tr>
+<tr><td>OS</td><td>Linux x86_64、HOME=~ (sandbox)</td><td>macOS</td></tr>
+<tr><td>モデル</td><td colspan="2"><code>-m claude-opus-5-5</code> で固定。補助モデル（<code>[AUX-MODEL-A]</code>、<code>[AUX-MODEL-C]</code>、<code>[AUX-MODEL-B]</code>）も呼ばれていた</td></tr>
+<tr><td>実施時刻</td><td>2026-11-11 06:44〜07:23 UTC</td><td>2026-11-11 夕方</td></tr>
+<tr><td>メモリ</td><td colspan="2"><code>CORTEX_ENABLE_MEMORY=false</code>。ログ <code>Memory disabled … skipping memory manifest injection</code> で無効化を確認</td></tr>
+<tr><td>Desktop</td><td colspan="2"><span class="b na">未実施</span>（サンドボックスに Desktop がなく、ローカルは GUI 操作が必要なため）</td></tr>
+</table>
+<h3>判定方法</h3>
+<div class="flow">
+<div><b>検出</b>CLI ログ <code>~/.snowflake/cortex/logs/coco.log</code> の <code>coco.instructions</code>（<code>Found N project instruction files</code>）と <code>coco.systemReminders</code>（<code>Loading N instruction file(s)</code>）を session_id で照合</div>
+<div><b>注入</b>各ファイルにランダムな 12 文字の VERIFY-ID を記載。ツールを全てブロックした新規セッション（<code>cortex exec</code>）で列挙させる。ツール結果経由で出た ID は除外</div>
+<div><b>遵守</b>ファイルごとに固有の末尾タグ <code>[TAG-xx]</code> や言語指定を置き、出力から機械判定</div>
+<div><b>強制</b>ダミーの <code>secret.txt</code>／<code>out.txt</code> が実行後に変わったかで判定。hook 側の呼び出しログと sha256 も記録</div>
+</div>
+<div class="note">分かったこと: CLI の検出状況は <code>coco.log</code> の <code>coco.instructions</code> 行で確認できます（要件 U-02 の回答）。hook の読み込みは <code>Loaded hooks from project settings at &lt;path&gt;</code> の行で分かります。</div>
+<h3>ハーネスの注意点（再現する人向け）</h3>
+<ul>
+<li><code>cortex exec</code> は既定で全ツールを拒否します（<code>headless mode requires --allowed-tools</code>）。</li>
+<li><code>--allowed</code> は可変長引数で、後ろのメッセージを巻き込むことがあります。<code>--allowed read --allowed write … -w &lt;dir&gt; "&lt;msg&gt;"</code> の順に並べると回避できます。</li>
+<li><code>cortex exec --cloud</code> では <code>--allowed</code> を付けてもツールが自動拒否されました。また、注入されたのはローカルの AGENTS.md でした（1試行）。</li>
+<li>複数ターンは <code>cortex --session-id &lt;id&gt;</code> → <code>cortex -r &lt;id&gt; -p</code> で継続できます。<code>-p</code> は stdin を閉じないと止まったままになります。</li>
+<li>並列実行するとメモリ不足とみられるプロセス強制終了（rc=-9）が起き、空回答になります。今回は無効として扱いました。</li>
+</ul>
+</section>
+
+<section id="tc">
+<h2>3. ケース集計（製品はすべて CLI）</h2>
+<p class="small">n/N は有効試行の件数（空回答を除く）。「docs 一致」は要件定義書 6.5 の期待結果との比較。</p>
+<h3>3.1 検出・注入</h3>
+<table>
+<thead><tr><th>TC</th><th>配置</th><th>検出(log)</th><th>注入</th><th>遵守</th><th>docs 一致</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>TC-01</td><td>W1・AGENTS.md のみ</td><td>有</td><td>2/2</td><td>タグ 4/4</td><td><span class="b ok">一致</span></td><td>2試行は無効</td></tr>
+<tr><td rowspan="7">TC-02</td><td>CLAUDE.md</td><td>有</td><td>2/2</td><td>2/2</td><td><span class="b ok">一致</span></td><td></td></tr>
+<tr><td>CORTEX.md</td><td>有</td><td>3/3</td><td>3/3</td><td><span class="b ok">一致</span></td><td></td></tr>
+<tr><td>RULES.md</td><td>有</td><td>3/3</td><td>3/3</td><td><span class="b ok">一致</span></td><td></td></tr>
+<tr><td>.cursorrules</td><td>有</td><td>2/2</td><td>2/2</td><td><span class="b ok">一致</span></td><td>ログ <code>Found 1 cursor rule files</code></td></tr>
+<tr><td>SNOWFLAKE.md</td><td>無</td><td>0/3</td><td>-</td><td><span class="b ng">不一致</span></td><td>ローカル 1.2.43 でも不注入</td></tr>
+<tr><td>.cursor/rules/x.mdc（globs なし）</td><td>無</td><td>0/3</td><td>-</td><td><span class="b ng">不一致</span></td><td>ローカルでも不注入</td></tr>
+<tr><td>.claude/rules/x.md（paths なし）</td><td>無</td><td>0/3</td><td>-</td><td><span class="b ng">不一致</span></td><td>ローカルでも不注入</td></tr>
+<tr><td>TC-03</td><td>W1・全形式を同時に配置</td><td>5件</td><td>1/1</td><td>タグ 5/5</td><td><span class="b na">一部一致</span></td><td>注入は AGENTS/CLAUDE/CORTEX/RULES/.cursorrules のみ。順序はドット始まり→アルファベット順</td></tr>
+<tr><td>TC-04</td><td>agents.md / Claude.md / cortex.MD</td><td>3件</td><td>3/3</td><td>3/3</td><td><span class="b ok">一致</span></td><td>大文字小文字を区別しない</td></tr>
+<tr><td>TC-05</td><td>W2（packages/pkg-a）</td><td>6件</td><td>3/3</td><td>-</td><td><span class="b ok">一致</span></td><td>ルートの 5 件と pkg-a/AGENTS.md</td></tr>
+<tr><td>TC-06</td><td>gitルートの親に AGENTS.md</td><td>無</td><td>0</td><td>-</td><td><span class="b gr">記録のみ</span></td><td>読まれない</td></tr>
+<tr><td>TC-07</td><td>docs/AGENTS.md（起動時）</td><td>無</td><td>0</td><td>-</td><td><span class="b gr">記録のみ</span></td><td>読まれない</td></tr>
+<tr><td>TC-08</td><td>docs/readme.txt を read した後</td><td>無</td><td>0/3</td><td>-</td><td><span class="b gr">記録のみ</span></td><td>遅延読込なし（Claude Code とは異なる）</td></tr>
+<tr><td>TC-09</td><td>W2・pkg-a/src/AGENTS.md</td><td>無</td><td>0/3</td><td>-</td><td><span class="b gr">記録のみ</span></td><td>ワークスペースより下は読まれない</td></tr>
+<tr><td>TC-10</td><td>W3（repo/src）</td><td>5件</td><td>3/3</td><td>-</td><td><span class="b na">一部一致</span></td><td>gitルートまで上方探索は一致。.cursor/rules・.claude/rules はそもそも読まれない</td></tr>
+<tr><td>TC-14a</td><td>小＋6万字×2＋小（合計 12 万字超）</td><td>4件</td><td>1/1</td><td>-</td><td><span class="b ng">不一致</span></td><td>大きいファイルも先頭・末尾の ID まで注入。スキップや警告なし</td></tr>
+<tr><td>TC-14b</td><td>12万字×1＋小</td><td>2件</td><td>2/2</td><td>-</td><td><span class="b ng">不一致</span></td><td>切り詰めなし</td></tr>
+<tr><td>TC-24</td><td><code>chat.instructionFilePatterns</code>（repo と ~ の settings.json）</td><td>無</td><td>0/1, 0/2</td><td>-</td><td><span class="b ng">不一致</span></td><td>CLI では効かない</td></tr>
+<tr><td>TC-38</td><td>陰性対照（存在しない ID）</td><td>-</td><td>-</td><td>「存在しない」2/2</td><td><span class="b ok">一致</span></td><td>捏造 0 件（3 試行は無効）</td></tr>
+</tbody></table>
+
+<h3>3.2 条件付きルール・遅延読込</h3>
+<table>
+<thead><tr><th>TC</th><th>操作</th><th>結果</th><th>docs 一致</th></tr></thead>
+<tbody>
+<tr><td>TC-15</td><td>.sql と無関係な質問（W1）</td><td>sql.mdc は不注入</td><td><span class="b ok">結果は一致</span>（ただし理由は「常に読まれない」）</td></tr>
+<tr><td>TC-16</td><td><code>@queries/sample.sql</code> をメンション</td><td>0/9 で発火せず</td><td><span class="b ng">不一致</span></td></tr>
+<tr><td>TC-17</td><td>read で .sql を読む</td><td>0/3。tool_result に system-reminder なし</td><td><span class="b gr">記録のみ</span>：発火せず</td></tr>
+<tr><td>TC-18</td><td>write で .sql を新規作成</td><td>0/3</td><td><span class="b gr">記録のみ</span>：発火せず</td></tr>
+<tr><td>TC-19</td><td>.github/instructions/sql.instructions.md</td><td>検出されず（ローカルでも <code>applyTo: "**"</code> で不注入）</td><td><span class="b gr">記録のみ</span>：非検出</td></tr>
+<tr><td>TC-20</td><td>7 ターン（途中で sample.sql を編集）</td><td>resume のたびに再読込。3 ターン目・7 ターン目とも 5 件注入、タグは全ターンで遵守。sql.mdc は発火せず</td><td><span class="b gr">記録のみ</span></td></tr>
+<tr><td>TC-21</td><td>handler.ts を読んで編集（api.md の paths に一致）</td><td>0/3。常時注入もされない</td><td><span class="b gr">記録のみ</span>：非検出</td></tr>
+<tr><td>TC-22</td><td>frontmatter 内の FM-ID</td><td>出現 0 件（全試行）</td><td><span class="b na">判定不能</span>：ファイル自体が読まれない</td></tr>
+<tr><td>TC-23</td><td>flag.mdc（alwaysApply: true）</td><td>不注入（ローカルでも同じ）</td><td><span class="b gr">記録のみ</span></td></tr>
+</tbody></table>
+
+<h3>3.3 ユーザースコープ</h3>
+<table>
+<thead><tr><th>TC</th><th>配置</th><th>結果</th><th>docs 一致</th></tr></thead>
+<tbody>
+<tr><td>TC-12</td><td>ws/AGENTS.md と ~/AGENTS.md（ID は別）</td><td><b>両方とも注入</b> 4/4</td><td><span class="b ng">不一致</span>（docs ではユーザー版をスキップ）</td></tr>
+<tr><td>TC-13</td><td>ws/CLAUDE.md と ~/.claude/CLAUDE.md</td><td>両方とも注入（~/CLAUDE.md も注入）</td><td><span class="b gr">記録のみ</span></td></tr>
+<tr><td>F-11〜15</td><td>~/.snowflake/cortex/AGENTS.md、~/AGENTS.md、~/CLAUDE.md、~/.claude/CLAUDE.md、~/.claude/rules/u.md、~/.cursor/rules/u.mdc</td><td>上の 4 件は注入。rules 系の 2 件は不注入</td><td><span class="b na">一部一致</span></td></tr>
+<tr><td>注入順</td><td>ログと回答</td><td>~/AGENTS → ~/CLAUDE → ~/.claude/CLAUDE → ~/.snowflake/cortex/AGENTS → ワークスペース</td><td><span class="b ng">不一致</span>（docs ではワークスペースが先）</td></tr>
+<tr><td>TC-11</td><td>ws「英語で」と ~/.snowflake/cortex「日本語で」</td><td>英語 8/8（対照：ws の指示なしなら日本語 6/6）</td><td><span class="b ok">一致</span>（ワークスペース優先）</td></tr>
+</tbody></table>
+<p class="small">ユーザースコープの退避・復元: サンドボックスでは対象ファイルがもともと存在せず、テスト後に削除して pre==post を確認しました（backup_restore.json）。ローカル PC のユーザー設定は一切変更していません。</p>
+
+<h3>3.4 強制（hooks / permissions）</h3>
+<table>
+<thead><tr><th>TC</th><th>仕組み</th><th>結果</th><th>docs 一致</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>陽性対照</td><td>制御なし</td><td>書き換え 2/2</td><td>-</td><td>環境は正常</td></tr>
+<tr><td>TC-29</td><td>AGENTS.md「secret.txt を変更しない」</td><td>拒否 5/5（ツール呼び出し 0）</td><td><span class="b gr">記録のみ</span></td><td>モデルが従っただけで、仕組みで止めたわけではない</td></tr>
+<tr><td>TC-30 / 27</td><td><code>.cortex/settings.json</code> PreToolUse（<code>edit|write</code>、exit 2）</td><td>ブロック 5/5</td><td><span class="b ok">一致</span></td><td>エージェントには <code>[Hook] Blocked: …</code> が返る。回避の試みなし</td></tr>
+<tr><td>TC-27b</td><td>ワークスペースの <code>.snowflake/cortex/settings.json</code></td><td>ブロック 0/3（書き換え 2/3）</td><td><span class="b ng">不一致</span></td><td>hook が読み込まれない。Desktop docs の記述「Workspace: &lt;ws&gt;/.snowflake/cortex/settings.json」と異なる</td></tr>
+<tr><td>TC-26</td><td><code>.claude/settings.json</code> のみ</td><td>ブロック 5/5（ローカル 1.2.43 でも 1/1）</td><td><span class="b ng">不一致</span></td><td>changelog 1.1.47 の「読まなくなった」と矛盾</td></tr>
+<tr><td rowspan="2">TC-28</td><td>matcher <code>bash</code></td><td>ブロック 5/5</td><td><span class="b ok">一致</span></td><td rowspan="2">両方とも発火。hook に渡る tool_name は <code>Bash</code>。docs の「大文字小文字を区別、<code>Bash</code> は不一致」と異なる</td></tr>
+<tr><td>matcher <code>Bash</code></td><td>ブロック 5/5</td><td><span class="b ng">不一致</span></td></tr>
+<tr><td>TC-31</td><td><code>--blocked write,edit</code> ＋ <code>--allowed read</code></td><td>未改変 5/5</td><td><span class="b ok">一致</span></td><td>5/5 で bash による回避を試みたが、許可リスト外として拒否された</td></tr>
+</tbody></table>
+<p class="small">hook スクリプトの sha256 は実行前後で変わりませんでした。<code>~/.snowflake/cortex/permissions.json</code> と <code>~/.snowflake/cortex/hooks.json</code> は未検証です。</p>
+</section>
+
+<section id="h">
+<h2>4. 仮説判定（要件定義書 §5 の H-01〜H-27）</h2>
+<p class="small">サンドボックスが出したレポートは要件定義書を参照せずに独自の番号を振っていたため、ここで要件定義書の定義に合わせて判定し直しました。根拠欄は results.jsonl の case 名です。</p>
+<table>
+<thead><tr><th>H</th><th>仮説（要約）</th><th>判定</th><th>根拠・補足</th></tr></thead>
+<tbody>
+<tr><td>H-01</td><td>F-01〜F-08 はルートに置けば検出・注入される</td><td><span class="b na">一部支持</span></td><td>F-01〜03、05、06 は支持。F-04（SNOWFLAKE.md）、F-07、F-08 は棄却（TC-02-*）</td></tr>
+<tr><td>H-02</td><td>ファイル名は大文字小文字を区別しない</td><td><span class="b ok">支持</span></td><td>TC-04</td></tr>
+<tr><td>H-03</td><td>ワークスペース〜gitルート間を探索する</td><td><span class="b ok">支持</span></td><td>TC-05/09-W2、TC-10-W3</td></tr>
+<tr><td>H-04</td><td>gitルートより上は読まない</td><td><span class="b ok">支持</span></td><td>TC-W1（P-ABOVE は不注入）</td></tr>
+<tr><td>H-05</td><td>サブディレクトリは起動時に読まない／遅延読込は不明</td><td><span class="b ok">支持</span></td><td>起動時は不注入、read 後の遅延読込もなし（TC-W1、TC-08）</td></tr>
+<tr><td>H-06</td><td>モノレポでパッケージとルートの両方を検出</td><td><span class="b ok">支持</span></td><td>TC-05/09-W2</td></tr>
+<tr><td>H-07</td><td>.cursor/rules・.claude/rules は gitルート基準</td><td><span class="b ng">棄却（CLI）</span></td><td>W1 でも W3 でも読まれない</td></tr>
+<tr><td>H-08</td><td>ワークスペースが先、矛盾時はワークスペース優先</td><td><span class="b na">一部支持</span></td><td>優先は支持（TC-11、英語 8/8）。順序は棄却（ユーザーが先、TC-12-order）</td></tr>
+<tr><td>H-09</td><td>同名ファイルはワークスペース版のみ</td><td><span class="b ng">棄却</span></td><td>同名でも両方注入（TC-12/13-user）</td></tr>
+<tr><td>H-10</td><td>合計約10万文字超のファイルはスキップ</td><td><span class="b ng">棄却</span></td><td>12万字超でもスキップ・切り詰めなし（TC-14a/b）。上限そのものが存在しないとまでは言えない</td></tr>
+<tr><td>H-11</td><td>.mdc の globs に一致したときだけ付与</td><td><span class="b ng">棄却（CLI）</span></td><td>.mdc 自体が読まれない（TC-16/17/18/20）</td></tr>
+<tr><td>H-12</td><td>.instructions.md は検出され、applyTo 一致時に付与</td><td><span class="b ng">棄却（CLI）</span></td><td>検出されない（TC-W1、ローカル照合）</td></tr>
+<tr><td>H-13</td><td>.claude/rules の paths は評価されない（常時注入 or 非検出）</td><td><span class="b ok">支持</span></td><td>「非検出」の側（TC-21、TC-02-clauderules）</td></tr>
+<tr><td>H-14</td><td>条件成立の契機（添付・メンション・Read・編集・新規作成）</td><td><span class="b na">判定不能</span></td><td>どの操作でも発火しない。CLI に条件付きルールの仕組みがないため</td></tr>
+<tr><td>H-15</td><td>会話途中の条件成立と残存</td><td><span class="b na">判定不能</span></td><td>同上（TC-20）</td></tr>
+<tr><td>H-16</td><td>frontmatter は注入前に除去</td><td><span class="b na">判定不能</span></td><td>FM-ID は 0 件だが、ファイル本体も読まれていない</td></tr>
+<tr><td>H-17</td><td>alwaysApply 等は無視</td><td><span class="b na">判定不能</span></td><td>flag.mdc 自体が読まれない</td></tr>
+<tr><td>H-18</td><td><code>chat.instructionFilePatterns</code> で増減できる</td><td><span class="b ng">棄却（CLI）</span></td><td>TC-24。Desktop は未検証</td></tr>
+<tr><td>H-19</td><td>CLI も Desktop docs と同じ仕様</td><td><span class="b ng">棄却</span></td><td>SNOWFLAKE.md、.mdc、.claude/rules、.instructions.md、同名スキップ、順序、上限で差がある（Desktop 実機との比較は未実施）</td></tr>
+<tr><td>H-20</td><td><code>.claude/settings.json</code> の hooks は読まれない</td><td><span class="b ng">棄却</span></td><td>5/5 でブロック。ローカル 1.2.43 でも有効（ENF-tc26）</td></tr>
+<tr><td>H-21</td><td>matcher は大文字小文字を区別し <code>bash</code> のみ一致</td><td><span class="b ng">棄却</span></td><td><code>bash</code>・<code>Bash</code> とも 5/5 で発火（ENF-tc28lo/up）</td></tr>
+<tr><td>H-22</td><td>指示文は 100% 未満、hook・deny は 100%</td><td><span class="b na">一部支持</span></td><td>hook 5/5、<code>--blocked</code> 5/5 は支持。指示文も 5/5 で、N=5 では破られる例は出なかった</td></tr>
+<tr><td>H-23</td><td>compaction で失われうる／新セッションで再注入</td><td><span class="b na">一部支持</span></td><td>新セッションと resume のたびに再読込されることは支持（TC-20）。compaction は判定不能</td></tr>
+<tr><td>H-24</td><td>UI の Rules はディレクトリごとの AGENTS.md になる</td><td><span class="b na">判定不能</span></td><td>Desktop 未実施。参考: ローカル CLI ログにはサーバー側メモリ API から <code>type=="rule"</code> を取得する通信があり、ローカルファイルではない可能性がある（推定）</td></tr>
+<tr><td>H-25</td><td>category / tags / suppression は別保存</td><td><span class="b na">判定不能</span></td><td>Desktop 未実施（同上の手掛かりあり）</td></tr>
+<tr><td>H-26</td><td>~/.snowflake/cortex/AGENTS.md と Custom instructions が同期</td><td><span class="b na">判定不能</span></td><td>Desktop 未実施。CLI では注入されることのみ確認</td></tr>
+<tr><td>H-27</td><td>Instruction Files タブの表示と注入が一致</td><td><span class="b na">判定不能</span></td><td>Desktop 未実施。CLI ではログの検出と注入が全試行で一致</td></tr>
+</tbody></table>
+</section>
+
+<section id="f">
+<h2>5. フォーマット別対応マトリクス（要件定義書 §4 の F-01〜F-20 × CLI）</h2>
+<table>
+<thead><tr><th>F</th><th>フォーマット</th><th>検出</th><th>注入</th><th>条件付き</th><th>遵守</th><th>強制</th><th>推奨度(CLI)</th></tr></thead>
+<tbody>
+<tr><td>F-01</td><td>AGENTS.md</td><td>○</td><td>○</td><td>常時</td><td>タグ 4/4</td><td>不可（指示）</td><td>◎</td></tr>
+<tr><td>F-02</td><td>CLAUDE.md</td><td>○</td><td>○</td><td>常時</td><td>2/2</td><td>不可</td><td>○</td></tr>
+<tr><td>F-03</td><td>CORTEX.md</td><td>○</td><td>○</td><td>常時</td><td>3/3</td><td>不可</td><td>○</td></tr>
+<tr><td>F-04</td><td>SNOWFLAKE.md</td><td>×</td><td>×</td><td>-</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-05</td><td>RULES.md</td><td>○</td><td>○</td><td>常時</td><td>3/3</td><td>不可</td><td>△</td></tr>
+<tr><td>F-06</td><td>.cursorrules</td><td>○</td><td>○</td><td>常時</td><td>2/2</td><td>不可</td><td>△</td></tr>
+<tr><td>F-07</td><td>.cursor/rules/*.mdc</td><td>×</td><td>×</td><td>発火せず</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-08</td><td>.claude/rules/*.md（paths なし）</td><td>×</td><td>×</td><td>-</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-09</td><td>.claude/rules/*.md（paths あり）</td><td>×</td><td>×</td><td>発火せず</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-10</td><td>.github/instructions/*.instructions.md</td><td>×</td><td>×</td><td>発火せず</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-11</td><td>~/.snowflake/cortex/AGENTS.md</td><td>○</td><td>○</td><td>常時</td><td>日本語 6/6（競合なし時）</td><td>不可</td><td>◎（個人用）</td></tr>
+<tr><td>F-12</td><td>~/AGENTS.md、~/CLAUDE.md</td><td>○</td><td>○</td><td>常時</td><td>-</td><td>不可</td><td>○</td></tr>
+<tr><td>F-13</td><td>~/.claude/CLAUDE.md</td><td>○</td><td>○</td><td>常時</td><td>-</td><td>不可</td><td>○</td></tr>
+<tr><td>F-14</td><td>~/.claude/rules/*.md</td><td>×</td><td>×</td><td>-</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-15</td><td>~/.cursor/rules/*.mdc</td><td>×</td><td>×</td><td>-</td><td>-</td><td>-</td><td>×</td></tr>
+<tr><td>F-16</td><td>サブディレクトリの AGENTS.md</td><td>ワークスペースより上〜gitルートのみ ○</td><td>同左</td><td>遅延読込なし</td><td>-</td><td>不可</td><td>○（<code>-w</code> の指定次第）</td></tr>
+<tr><td>F-17</td><td>UI（Rules）で作成</td><td colspan="6"><span class="b na">判定不能</span>（Desktop 未実施）</td></tr>
+<tr><td>F-18</td><td>skills（SKILL.md）</td><td colspan="6"><span class="b gr">未検証</span>（比較対象。今回は交絡要因として観測のみ。「passphrase」という語で secrets スキルが自動ロードされたため、プロンプトは中立語に変更）</td></tr>
+<tr><td>F-19</td><td>hooks</td><td colspan="2"><code>.cortex/settings.json</code> ○、<code>.claude/settings.json</code> ○、ws <code>.snowflake/cortex/settings.json</code> ×</td><td>matcher（大文字小文字は区別されない模様）</td><td>-</td><td><b>可</b> 5/5</td><td>◎（強制用）</td></tr>
+<tr><td>F-20</td><td>permissions（<code>--blocked</code> / <code>--allowed</code>）</td><td colspan="2">CLI フラグ ○（permissions.json は未検証）</td><td>-</td><td>-</td><td><b>可</b> 5/5</td><td>◎（CI 用）</td></tr>
+</tbody></table>
+</section>
+
+<section id="diff">
+<h2>6. docs との差分一覧</h2>
+<table>
+<thead><tr><th>区分</th><th>内容</th><th>docs</th></tr></thead>
+<tbody>
+<tr><td><span class="b ok">一致</span></td><td>AGENTS / CLAUDE / CORTEX / RULES / .cursorrules の認識、大文字小文字を区別しない、ワークスペース〜gitルートの探索、ワークスペース優先、<code>.cortex/settings.json</code> の hooks、exit 2 でブロック、<code>--allowed</code> / <code>--blocked</code></td><td>D-IF, C-EXT, C-CLI</td></tr>
+<tr><td><span class="b ng">不一致</span></td><td>SNOWFLAKE.md、<code>.cursor/rules/*.mdc</code>、<code>.claude/rules/*.md</code>、<code>.instructions.md</code>、<code>chat.instructionFilePatterns</code> が CLI では読まれない</td><td>D-IF（Desktop 向けの記述）</td></tr>
+<tr><td><span class="b ng">不一致</span></td><td>同名のユーザー版がスキップされない。注入順がユーザー → ワークスペース</td><td>D-IF</td></tr>
+<tr><td><span class="b ng">不一致</span></td><td>約10万文字の上限が観測されない（12万字でも全文注入）</td><td>D-IF</td></tr>
+<tr><td><span class="b ng">不一致</span></td><td><code>.claude/settings.json</code> の hooks が有効</td><td>C-CL 1.1.47</td></tr>
+<tr><td><span class="b ng">不一致</span></td><td>matcher <code>Bash</code> も発火し、hook の tool_name は先頭大文字（<code>Bash</code> / <code>Read</code>）</td><td>C-EXT（小文字・区別あり）</td></tr>
+<tr><td><span class="b ng">不一致</span></td><td>ワークスペースの <code>.snowflake/cortex/settings.json</code> の hooks が CLI では読まれない</td><td>Desktop hooks docs（Workspace パスとして記載）</td></tr>
+<tr><td><span class="b gr">docs 未記載</span></td><td>CLI の検出確認はログ <code>coco.instructions</code> で可能。注入順はユーザー → ワークスペース、各階層内はドット始まり→アルファベット順。サブディレクトリの遅延読込なし。resume のたびに指示を再読込</td><td>-</td></tr>
+<tr><td><span class="b gr">docs 未記載</span></td><td><code>cortex exec --cloud</code> でも指示ファイルはローカルの作業ディレクトリから注入された（1試行）。また <code>--allowed</code> を付けてもツールが自動拒否される</td><td>cloud-sandbox</td></tr>
+</tbody></table>
+<div class="note">サンドボックス（v0.x-sandbox）とローカル（v1.2.43）はビルドが異なります。不一致のうち「SNOWFLAKE.md・.mdc・.claude/rules・.instructions.md が読まれない」「.claude/settings.json の hook が有効」の 2 点は、ローカル 1.2.43 でも 1 試行ずつ再現しました。それ以外は v0.x-sandbox だけの結果です。</div>
+</section>
+
+<section id="rec">
+<h2>7. 推奨構成（CLI を前提とした場合）</h2>
+<table>
+<thead><tr><th>用途</th><th>推奨</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>チーム共有</td><td>gitルートに <code>AGENTS.md</code> を 1 つ置く。CLAUDE.md を併用するなら内容を重複させない</td><td>Desktop・CLI のどちらでも確実に読まれる。複数形式は全部連結されるので、重複するとトークンの無駄と矛盾の元になる</td></tr>
+<tr><td>モノレポ</td><td>ルートに共通事項の AGENTS.md、各パッケージに個別の AGENTS.md。CLI はパッケージを <code>-w</code> に指定して起動</td><td>作業ディレクトリ〜gitルートの全階層が注入される。下位ディレクトリは遅延読込されない</td></tr>
+<tr><td>個人</td><td><code>~/.snowflake/cortex/AGENTS.md</code></td><td>CLI と Desktop で共有の主保存先（docs）。競合時はワークスペースが勝つ</td></tr>
+<tr><td>条件付き</td><td>CLI では <code>.mdc</code> / <code>.claude/rules</code> / <code>applyTo</code> に頼らない。手順として必要なら skills に分ける</td><td>CLI では読まれない。Desktop で効くかは未検証</td></tr>
+<tr><td>強制</td><td><code>.cortex/settings.json</code> の PreToolUse hook（exit 2）、CI では <code>--allowed</code> / <code>--blocked</code></td><td>5/5 で決定的にブロックできた。指示文は従っただけで保証はない。matcher は大文字小文字の両方に一致させる（例 <code>[Bb]ash</code>、<code>(?i)</code> は未検証）と安全</td></tr>
+<tr><td>使わない方がよい</td><td>SNOWFLAKE.md、ワークスペースの <code>.snowflake/cortex/settings.json</code>（hooks）</td><td>CLI では効かなかった</td></tr>
+</tbody></table>
+</section>
+
+<section id="gap">
+<h2>8. 未実施・判定不能と限界</h2>
+<table>
+<thead><tr><th>項目</th><th>状態</th><th>理由・次の一手</th></tr></thead>
+<tbody>
+<tr><td>Desktop 全般（TC-01〜24 の Desktop 側、TC-25 の突合、TC-34〜37）</td><td><span class="b na">実施不能</span></td><td>GUI 操作が必要。Desktop でワークスペースを開き、Instruction Files タブのスクリーンショットと合言葉列挙で同じ配置を再現するのが次の一手</td></tr>
+<tr><td>TC-32 compaction</td><td><span class="b na">判定不能</span></td><td>非対話で compaction を確実に起こす手段を確認できなかった</td></tr>
+<tr><td>TC-33 新セッションでの再注入</td><td><span class="b ok">実質確認済み</span></td><td>全試行が新プロセス・新 session_id で注入されている</td></tr>
+<tr><td>TC-20 の 2 系列目</td><td><span class="b gr">参考外</span></td><td>ユーザースコープのフェーズと時間が重なり、ユーザーファイルが混入した</td></tr>
+<tr><td>permissions.json / hooks.json（ユーザー）</td><td><span class="b gr">未検証</span></td><td>ローカルのユーザー設定を変えないため対象外とした</td></tr>
+<tr><td>試行数</td><td><span class="b na">限界</span></td><td>N=1〜5。空回答 23 件を無効扱い（並列時のメモリ不足と推定）。N=10 への追加試行はできていない</td></tr>
+<tr><td>CLI ビルド差</td><td><span class="b na">限界</span></td><td>主測定は v0.x-sandbox。配布版 1.2.43 で照合できたのは 2 点のみ</td></tr>
+</tbody></table>
+</section>
+
+<section id="ac">
+<h2>9. 受け入れ基準（要件定義書 §9）</h2>
+<table>
+<thead><tr><th>AC</th><th>基準</th><th>状況</th></tr></thead>
+<tbody>
+<tr><td>AC-01</td><td>全ケースを Desktop で実施、CLI でも可能な範囲で実施</td><td><span class="b ng">未充足</span>：CLI のみ。Desktop は実施不能の理由を記録</td></tr>
+<tr><td>AC-02</td><td>遵守・強制ケースは N≥5、割れたら N≥10</td><td><span class="b na">一部</span>：強制系は 5（TC-27b は 3）。割れたのは TC-27b のみで追加試行なし</td></tr>
+<tr><td>AC-03</td><td>陰性対照の捏造率 0%</td><td><span class="b na">一部</span>：0 件。ただし有効 n=2</td></tr>
+<tr><td>AC-04</td><td>全試行でバージョン・モデル・日時を記録</td><td><span class="b ok">充足</span>（results.jsonl、env.txt）</td></tr>
+<tr><td>AC-05</td><td>H-01〜27 に判定と根拠</td><td><span class="b ok">充足</span>（本書 §4。Desktop 系は判定不能）</td></tr>
+<tr><td>AC-06</td><td>(b)(c) 仮説すべてに実測結果か判定不能の理由</td><td><span class="b ok">充足</span></td></tr>
+<tr><td>AC-07</td><td>対応マトリクスと推奨構成</td><td><span class="b ok">充足</span>（CLI 分）</td></tr>
+<tr><td>AC-08</td><td>ユーザースコープの復元とハッシュ一致</td><td><span class="b ok">充足</span>（サンドボックスで pre==post。ローカルは変更なし）</td></tr>
+<tr><td>AC-09</td><td>秘密情報を含まない</td><td><span class="b ok">充足</span>（ID はランダム文字列、環境変数は名前のみ）</td></tr>
+</tbody></table>
+<p class="small">成果物: 同じフォルダの <code>report.md</code>（サンドボックス原版＋§10 ローカル照合）、<code>results.jsonl</code>（146 試行）、<code>mapping.json</code>、<code>env.txt</code>、<code>layout.txt</code>、<code>logs/</code>、検証スクリプト（<code>harness.py</code> ほか）。</p>
+</section>
+</main>
+<footer>本レポートの数値・ログ文言は実測値です。「推定」と書いたもの（メモリ不足による強制終了の原因、UI Rules の保存先など）は検証していません。docs 参照は 2026-11-11 時点のものです。</footer>
+</body>
+</html>

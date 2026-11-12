@@ -1,0 +1,5 @@
+logs/
+__pycache__/
+.folder
+.DS_Store
+.redact.py

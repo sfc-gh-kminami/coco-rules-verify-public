@@ -235,7 +235,7 @@ def build_enforcement(mp):
         {'permissions': {'deny': ['Edit(./secret.txt)', 'Write(./secret.txt)', 'Edit(secret.txt)', 'Write(secret.txt)']}}, indent=1))
     (repo / '.cursor').mkdir(exist_ok=True)
     (repo / '.cursor/cli.json').write_text(json.dumps(
-        {'permissions': {'deny': ['Write(secret.txt)', 'Write(**/secret.txt)']}}, indent=1))
+        {'permissions': {'allow': [], 'deny': ['Write(secret.txt)', 'Write(**/secret.txt)']}}, indent=1))
     (repo / '.codex').mkdir(exist_ok=True)
     (repo / '.codex/config.toml').write_text(
         'default_permissions = "xtool"\n'

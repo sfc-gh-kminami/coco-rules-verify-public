@@ -113,6 +113,12 @@ python3 report.py                     # -> /tmp/xtool-verify/results/report.md�
 - CoCo の `E-FLAG`（`--blocked write,edit`）は、シェルが許可されていると `printf ... > secret.txt` で回避されました（1 試行）。
 - CoCo は `.claude/` と `.cortex/` の両方に hook があると `.claude/` 側だけを発火させました（1 試行、docs 記載なし）。
 
+### Cursor CLI で観測済み（2026.11.13-eacade1）
+
+- ヘッドレス（`-p`）では、`~/.cursor/cli-config.json` の allowlist に無いシェルコマンドが理由なしで拒否されました（`"rejected": {"reason": ""}`）。シェルを使うケースは `XTOOL_CURSOR_FORCE=1`（`--force`）が必要です。`--force` でも `permissions.deny` と hooks は効きました。
+- `.cursor/cli.json` は `permissions.allow` が無いと設定検証エラーで起動しません（docs の例は deny のみ）。キットの fixture は `"allow": []` を入れています。
+- hook の stdin には `user_email` などが含まれます。`results/raw/` と `_hooks/invocations.log` は公開しないでください。
+
 ## 各ツールのフラグについて
 
 `adapters.py` のフラグは 2026-11 時点の公式 docs に基づきますが、CLI はよく変わります。`--list` と 2) の動作確認で、各記録の `cmd`・`stderr_tail` を見て、エラーが出る場合は `XTOOL_<TOOL>_EXTRA` で補うか `adapters.py` を直してください。docs から確定できなかった書式（Codex の `.codex/hooks.json`、Copilot の `.github/copilot/settings.json`）は、発火しなくても「書式違い」の可能性があります。

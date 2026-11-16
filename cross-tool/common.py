@@ -118,6 +118,15 @@ def extract_tool_calls(stdout):
             if t in _CALL_TYPES:
                 name = o.get('name') or t
                 inp = o.get('input', o.get('arguments', o.get('command', o.get('changes'))))
+                inner = o.get('tool_call')
+                if t == 'tool_call' and isinstance(inner, dict):          # Cursor CLI: {"tool_call": {"shellToolCall": {...}}}
+                    k = next((x for x in inner if x.endswith('ToolCall') and isinstance(inner[x], dict)), None)
+                    if k:
+                        name = k[:-len('ToolCall')]
+                        inp = inner[k].get('args')
+                        res = inner[k].get('result')
+                        if isinstance(res, dict) and not res.get('success'):
+                            inp = {'args': inp, 'result': res}            # keep rejection details
             elif 'toolName' in o and ('toolArgs' in o or 'arguments' in o):      # Copilot-style
                 name, inp = o['toolName'], o.get('toolArgs', o.get('arguments'))
             if name:

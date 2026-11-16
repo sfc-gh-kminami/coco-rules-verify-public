@@ -37,3 +37,11 @@ python3 phaseD.py   # ユーザースコープのケース（~ 配下を一時�
 | `(redacted)` | サンドボックスの環境変数名一覧、ホスト・カーネル情報 |
 
 生ログ（`logs/`）は含めていません。
+
+## ツール横断の検証キット（cross-tool/）
+
+CoCo の結果で docs と異なる挙動が見つかったため、同じ手法で Claude Code・Codex CLI・Cursor・GitHub Copilot も実測できるキットを [`cross-tool/`](cross-tool/) に置いています。結果は含まず、手順・ダミー環境の生成・実行・集計のスクリプトだけです。
+
+- 要件定義書: [`cross-tool/REQUIREMENTS.md`](cross-tool/REQUIREMENTS.md)
+- 使い方: [`cross-tool/README.md`](cross-tool/README.md)
+- IDE（Cursor IDE / Copilot in VS Code / CoCo Desktop）の手作業手順: [`cross-tool/MANUAL.md`](cross-tool/MANUAL.md)

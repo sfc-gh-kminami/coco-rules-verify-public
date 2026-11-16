@@ -45,3 +45,4 @@ CoCo の結果で docs と異なる挙動が見つかったため、同じ手法
 - 要件定義書: [`cross-tool/REQUIREMENTS.md`](cross-tool/REQUIREMENTS.md)
 - 使い方: [`cross-tool/README.md`](cross-tool/README.md)
 - IDE（Cursor IDE / Copilot in VS Code / CoCo Desktop）の手作業手順: [`cross-tool/MANUAL.md`](cross-tool/MANUAL.md)
+- AI エージェントに実行を任せる手順とプロンプト: [`cross-tool/RUN_WITH_AGENT.md`](cross-tool/RUN_WITH_AGENT.md)

@@ -25,6 +25,8 @@ CoCo（Cortex Code）、Claude Code、Codex CLI、Cursor、GitHub Copilot が、
 
 IDE（Cursor IDE、Copilot in VS Code、CoCo Desktop）は手作業です → [MANUAL.md](MANUAL.md)
 
+AI エージェント（Cursor の Agent など）に clone から実行・レポート作成まで任せる場合 → [RUN_WITH_AGENT.md](RUN_WITH_AGENT.md)（貼り付け用プロンプトあり）
+
 ## 手順
 
 ```sh

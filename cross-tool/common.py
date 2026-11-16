@@ -96,3 +96,64 @@ def append_jsonl(path, rec):
     path.parent.mkdir(parents=True, exist_ok=True)
     with _lock, open(path, 'a') as f:
         f.write(json.dumps(rec, ensure_ascii=False) + '\n')
+
+
+# ---------------------------------------------------------------- raw-output parsing (tool-agnostic)
+_CALL_TYPES = ('tool_use', 'function_call', 'tool_call', 'command_execution', 'exec_command',
+               'mcp_tool_call', 'file_change', 'local_shell_call')
+
+
+def extract_tool_calls(stdout):
+    """Best-effort list of tool calls from JSON/JSONL output of any of the supported CLIs."""
+    calls, seen = [], set()
+
+    def short(v):
+        s = v if isinstance(v, str) else json.dumps(v, ensure_ascii=False)
+        return s[:200]
+
+    def walk(o):
+        if isinstance(o, dict):
+            t = o.get('type')
+            name = None
+            if t in _CALL_TYPES:
+                name = o.get('name') or t
+                inp = o.get('input', o.get('arguments', o.get('command', o.get('changes'))))
+            elif 'toolName' in o and ('toolArgs' in o or 'arguments' in o):      # Copilot-style
+                name, inp = o['toolName'], o.get('toolArgs', o.get('arguments'))
+            if name:
+                key = o.get('id') or o.get('call_id') or (name, short(inp))
+                if key not in seen:
+                    seen.add(key)
+                    calls.append({'name': str(name), 'input': short(inp)})
+            for v in o.values():
+                walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+    for ln in stdout.splitlines():
+        try:
+            walk(json.loads(ln))
+        except Exception:
+            continue
+    return calls
+
+
+_BLOCK_RE = None
+
+
+def extract_block_messages(text):
+    """Messages that show a hook / permission / flag stopped something."""
+    import re
+    global _BLOCK_RE
+    if _BLOCK_RE is None:
+        _BLOCK_RE = re.compile(r'(\[Hook\][^"\\\n]{0,160}|BLOCKED by verification hook[^"\\\n]{0,80}'
+                               r'|Tool denied[^"\\\n]{0,160}|[Pp]ermission denied[^"\\\n]{0,120}'
+                               r'|not matched by any --allowed[^"\\\n]{0,80}|denied by (?:policy|rule)[^"\\\n]{0,120})')
+    out = []
+    for m in _BLOCK_RE.finditer(text):
+        s = m.group(0).strip()
+        if s not in out:
+            out.append(s)
+        if len(out) >= 5:
+            break
+    return out

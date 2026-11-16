@@ -21,7 +21,8 @@ from pathlib import Path
 
 from adapters import ADAPTERS
 from cases import CASES
-from common import FIX, HOOKS, INVLOG, RESULTS, ROOT, append_jsonl, load_map, sha
+from common import (FIX, HOOKS, INVLOG, RESULTS, ROOT, append_jsonl, extract_block_messages, extract_tool_calls,
+                    load_map, sha)
 from user_scope import MANIFEST
 
 RUNS = ROOT / 'runs'
@@ -136,6 +137,8 @@ def run_trial(adapter, case, k, ver, mapping):
         watch_before=before, watch_after=after,
         changed={w: before[w] != after[w] for w in case['watch']},
         hooks=hook_calls(root, t0, t1),
+        tool_calls=extract_tool_calls(out)[:40],
+        block_messages=extract_block_messages(out + '\n' + err),
         detect_log=detect_evidence(spec['log_dir'], root),
         **judge(answer, out + '\n' + err, mapping),
     )

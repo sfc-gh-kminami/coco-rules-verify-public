@@ -45,11 +45,26 @@ python3 user_scope.py apply           # hooks も試すなら --with-hooks
 python3 run.py --tool claude --cases 'U-*'
 python3 user_scope.py restore         # 「restored; all hashes match」を必ず確認
 
-# 5) 集計
-python3 summarize.py                  # -> /tmp/xtool-verify/results/summary.md
+# 5) 集計・レポート
+python3 summarize.py                  # -> /tmp/xtool-verify/results/summary.md（横並びの表だけ）
+python3 report.py                     # -> /tmp/xtool-verify/results/report.md（ケースごとの実験記録）
 ```
 
-複数ツールの結果は同じ `results/` に溜まり、`summarize.py` が横並びの表にします。
+複数ツールの結果は同じ `results/` に溜まり、`summarize.py` と `report.py` が横並びにします。
+
+### report.md の構成
+
+1. 実施環境（ツール・バージョン・モデル・試行数・無効数・日時、実行中の自己更新の有無）
+2. 仮説判定表（X-01〜X-19 × ツール。対象ツール・ケース・ファイルに絞って「docs通り／docsと不一致／記録のみ／対象外／未実施」）
+3. 配置したファイル（fixture ごとのファイル一覧、ID、frontmatter、設定ファイルの中身）
+4. ケースごとの実験記録:
+   - 配置・ワークスペース・モード・監視ファイル
+   - プロンプト、実際に流したコマンド（パスは `<ws>`、`$XTOOL_ROOT` に置換）
+   - 期待（docs）と実測の表（ファイルごと／設定ファイルごと／阻止回数）
+   - 観測（呼ばれたツールと回数、代表的なツール入力、ブロック表示、hook 呼び出し、ツールのログに出た設定ファイル）
+   - 回答例、判定（一致／不一致／記録のみ）と不一致の明細、解釈欄（空欄。人が書く）
+
+「期待」は `expect.py` に書いた各ツールの docs の記述です。docs が更新されたら `expect.py` を直して `report.py` を流し直してください（実行し直す必要はありません）。CoCo の期待値は Desktop docs（instruction-files）に基づくため、CLI では不一致が出ること自体が検証結果です。
 
 ### よく使う環境変数
 

@@ -55,6 +55,34 @@
 - 結果に推測を混ぜない。数値は out/report.md と results の記録から引用する。
 ````
 
+## Claude Code 用
+
+Claude Code の対話セッション（実行係）から、測定対象の `claude -p`（ヘッドレス）を `run.py --tool claude` で起動します。実行係のセッション自体は測定対象ではありません。
+
+```sh
+git clone https://github.com/sfc-gh-kminami/coco-rules-verify-public.git
+cd coco-rules-verify-public
+claude
+```
+
+起動したら、次の 1 文を入力します。
+
+```text
+cross-tool/RUN_WITH_AGENT.md の「Claude Code 用の指示」に従って、Claude Code CLI の検証を最後まで実行し、日本語で報告してください。
+```
+
+### Claude Code 用の指示（実行係が読む部分）
+
+上の「プロンプト（Cursor 用）」の手順と「守ること」に、次の読み替えで従う。
+
+- 測定対象は Claude Code CLI（`claude -p`）。`agent` → `claude`、`--tool cursor` → `--tool claude`、`XTOOL_CURSOR_*` → `XTOOL_CLAUDE_*`、`cursor.jsonl` / `raw/cursor-*` → `claude.jsonl` / `raw/claude-*`、ログ名 `/tmp/xtool-cursor-run.log` → `/tmp/xtool-claude-run.log`。
+- 手順 3 の確認コマンドは `which claude`、`claude --version`、`claude --help`（`-p`、`--output-format`、`--model`、`--allowedTools`、`--disallowedTools`、`--no-session-persistence`、`--debug-file` があるか）。
+- 手順 4 のモデルは、`claude --help` やエラーメッセージで分かる正式なモデル名を XTOOL_CLAUDE_MODEL に設定する（例: Opus 系）。分からなければ未設定で進め、報告する。
+- 手順 6 で Cursor の `XTOOL_CURSOR_FORCE` に当たるものはない。E-POS で secret.txt が書き換わらない場合は、stderr_tail と cmd を見て `--allowedTools` の指定を adapters.py の Claude クラスで最小限に直す。`--dangerously-skip-permissions` は使わない。
+- **入れ子起動の確認**: 動作確認で、内側の `claude -p` が「別の Claude Code セッションの中では起動できない」といった趣旨のエラーで失敗した場合は、回避策を勝手に試さず、そこで止めて私に伝える（私が普通のターミナルから `python3 run.py --tool claude` を実行する）。
+- 手順 9 の「特に次の点」は、CLAUDE.md と AGENTS.md の関係（D-PAIR、S-agents_md）、CLAUDE.local.md・.claude/CLAUDE.md・.claude/rules（paths あり／なし）、gitルートより上、サブディレクトリの遅延読込（T-READ-DOCS、T-EDIT-TS）、どの hook 設定ファイルが発火したか（.claude/settings.json と他ツールのファイル）、matcher（M-*）、`.claude/settings.json` の `permissions.deny`（E-PERM-NATIVE）と `--disallowedTools`（E-FLAG）の阻止回数、に置き換える。
+- 結果は `cross-tool/out/` に置き、commit / push はしない。
+
 ## 他のツールで使う場合
 
 プロンプト中の `agent` / `--tool cursor` / `XTOOL_CURSOR_*` / `cursor.jsonl` を置き換えてください。

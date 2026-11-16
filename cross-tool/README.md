@@ -8,7 +8,7 @@ CoCo（Cortex Code）、Claude Code、Codex CLI、Cursor、GitHub Copilot が、
 
 を、同じダミー環境・同じプロンプトで実測するためのキットです。docs に「読まない」と書いてあるものも含めて全部試します（理由と仮説は [REQUIREMENTS.md](REQUIREMENTS.md)）。
 
-**結果は含めていません。** 実行すると `$XTOOL_ROOT/results/` に出力されます。
+実行すると `$XTOOL_ROOT/results/` に出力されます。2026-11-16 に CoCo CLI と Cursor CLI で実施した結果は [results-2026-11-16/](results-2026-11-16/) にあります（伏せ字処理済み）。
 
 ## 必要なもの
 

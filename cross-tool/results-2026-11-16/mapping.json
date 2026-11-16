@@ -1,0 +1,477 @@
+{
+ "ids": {
+  "B9ZOWGVQJDEH": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/AGENTS.md",
+   "label": "ABOVE-GIT-ROOT/AGENTS.md",
+   "kind": "body"
+  },
+  "OY5SJV434P00": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/AGENTS.md",
+   "label": "ROOT/AGENTS.md",
+   "kind": "body"
+  },
+  "NOX44687S9WH": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/AGENTS.override.md",
+   "label": "ROOT/AGENTS.override.md",
+   "kind": "body"
+  },
+  "KQHHD9VNQRAS": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/CLAUDE.md",
+   "label": "ROOT/CLAUDE.md",
+   "kind": "body"
+  },
+  "N3HEMI0L6Z6D": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/CLAUDE.local.md",
+   "label": "ROOT/CLAUDE.local.md",
+   "kind": "body"
+  },
+  "GPRT4ZBDLK4N": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.claude/CLAUDE.md",
+   "label": "ROOT/.claude/CLAUDE.md",
+   "kind": "body"
+  },
+  "SCLMI1ZDLER5": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/CORTEX.md",
+   "label": "ROOT/CORTEX.md",
+   "kind": "body"
+  },
+  "0B0UM1OJLSMH": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/SNOWFLAKE.md",
+   "label": "ROOT/SNOWFLAKE.md",
+   "kind": "body"
+  },
+  "LADUU3XTWP6E": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/RULES.md",
+   "label": "ROOT/RULES.md",
+   "kind": "body"
+  },
+  "9DQ63GQ16JXL": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/GEMINI.md",
+   "label": "ROOT/GEMINI.md",
+   "kind": "body"
+  },
+  "Z1KNUP8OMTCY": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursorrules",
+   "label": "ROOT/.cursorrules",
+   "kind": "body"
+  },
+  "FDQXGOHG6UI3": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursor/rules/plain.mdc",
+   "label": "ROOT/.cursor/rules/plain.mdc",
+   "kind": "body"
+  },
+  "V1I3ORLXRBRP": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursor/rules/plain.mdc",
+   "label": "ROOT/.cursor/rules/plain.mdc",
+   "kind": "frontmatter"
+  },
+  "1TRGM14WJVF9": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursor/rules/always.mdc",
+   "label": "ROOT/.cursor/rules/always.mdc",
+   "kind": "body"
+  },
+  "TTKDXHY1LFEZ": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursor/rules/always.mdc",
+   "label": "ROOT/.cursor/rules/always.mdc",
+   "kind": "frontmatter"
+  },
+  "PNSS14JBEBYU": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursor/rules/sql.mdc",
+   "label": "ROOT/.cursor/rules/sql.mdc",
+   "kind": "body"
+  },
+  "5CCXU3X5416I": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursor/rules/sql.mdc",
+   "label": "ROOT/.cursor/rules/sql.mdc",
+   "kind": "frontmatter"
+  },
+  "9CSPVPRQGUG0": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursor/rules/notmdc.md",
+   "label": "ROOT/.cursor/rules/notmdc.md",
+   "kind": "body"
+  },
+  "J8UQBAWQ4SYL": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.claude/rules/plain.md",
+   "label": "ROOT/.claude/rules/plain.md",
+   "kind": "body"
+  },
+  "FMBBXX163FS4": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.claude/rules/api.md",
+   "label": "ROOT/.claude/rules/api.md",
+   "kind": "body"
+  },
+  "5EOK7ZGP5QAC": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.claude/rules/api.md",
+   "label": "ROOT/.claude/rules/api.md",
+   "kind": "frontmatter"
+  },
+  "38A93DYI4YRL": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.github/copilot-instructions.md",
+   "label": "ROOT/.github/copilot-instructions.md",
+   "kind": "body"
+  },
+  "RF45YEFD5KYO": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.github/instructions/all.instructions.md",
+   "label": "ROOT/.github/instructions/all.instructions.md",
+   "kind": "body"
+  },
+  "M7NP4XWJG19E": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.github/instructions/all.instructions.md",
+   "label": "ROOT/.github/instructions/all.instructions.md",
+   "kind": "frontmatter"
+  },
+  "TJMMN5NORJ4R": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.github/instructions/sql.instructions.md",
+   "label": "ROOT/.github/instructions/sql.instructions.md",
+   "kind": "body"
+  },
+  "Z09OE2P1OJ8P": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/.github/instructions/sql.instructions.md",
+   "label": "ROOT/.github/instructions/sql.instructions.md",
+   "kind": "frontmatter"
+  },
+  "HVZEYQFR4U1U": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/docs/AGENTS.md",
+   "label": "SUBDIR docs/AGENTS.md",
+   "kind": "body"
+  },
+  "AQ3DNWUH0T2J": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/docs/CLAUDE.md",
+   "label": "SUBDIR docs/CLAUDE.md",
+   "kind": "body"
+  },
+  "RM4UYN00HOBL": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/src/api/AGENTS.md",
+   "label": "SUBDIR src/api/AGENTS.md",
+   "kind": "body"
+  },
+  "6MTVO7163FYL": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/packages/pkg-a/AGENTS.md",
+   "label": "PKG packages/pkg-a/AGENTS.md",
+   "kind": "body"
+  },
+  "WJJKS76AQO21": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/packages/pkg-a/CLAUDE.md",
+   "label": "PKG packages/pkg-a/CLAUDE.md",
+   "kind": "body"
+  },
+  "WUZX19SJD1KH": {
+   "path": "$XTOOL_ROOT/fixtures/detect-parent/repo/packages/pkg-a/src/AGENTS.md",
+   "label": "PKG-SUB packages/pkg-a/src/AGENTS.md",
+   "kind": "body"
+  },
+  "S0L8IEKMB3VN": {
+   "path": "$XTOOL_ROOT/fixtures/single-agents_md/repo/AGENTS.md",
+   "label": "SINGLE/AGENTS.md",
+   "kind": "body"
+  },
+  "0WRI4TYC05UJ": {
+   "path": "$XTOOL_ROOT/fixtures/single-agents_override_md/repo/AGENTS.override.md",
+   "label": "SINGLE/AGENTS.override.md",
+   "kind": "body"
+  },
+  "9WI00XOJ2MBM": {
+   "path": "$XTOOL_ROOT/fixtures/single-claude_md/repo/CLAUDE.md",
+   "label": "SINGLE/CLAUDE.md",
+   "kind": "body"
+  },
+  "K17FB58R21AQ": {
+   "path": "$XTOOL_ROOT/fixtures/single-claude_local_md/repo/CLAUDE.local.md",
+   "label": "SINGLE/CLAUDE.local.md",
+   "kind": "body"
+  },
+  "BEX8VYJZP16S": {
+   "path": "$XTOOL_ROOT/fixtures/single-claude_claude_md/repo/.claude/CLAUDE.md",
+   "label": "SINGLE/.claude/CLAUDE.md",
+   "kind": "body"
+  },
+  "VK587DKOZBYK": {
+   "path": "$XTOOL_ROOT/fixtures/single-cortex_md/repo/CORTEX.md",
+   "label": "SINGLE/CORTEX.md",
+   "kind": "body"
+  },
+  "S9EI0BZ3S8UT": {
+   "path": "$XTOOL_ROOT/fixtures/single-snowflake_md/repo/SNOWFLAKE.md",
+   "label": "SINGLE/SNOWFLAKE.md",
+   "kind": "body"
+  },
+  "FGF3KP4N2IPR": {
+   "path": "$XTOOL_ROOT/fixtures/single-rules_md/repo/RULES.md",
+   "label": "SINGLE/RULES.md",
+   "kind": "body"
+  },
+  "6Q2TIA9BES3Q": {
+   "path": "$XTOOL_ROOT/fixtures/single-gemini_md/repo/GEMINI.md",
+   "label": "SINGLE/GEMINI.md",
+   "kind": "body"
+  },
+  "HK18JSP8AYDT": {
+   "path": "$XTOOL_ROOT/fixtures/single-cursorrules/repo/.cursorrules",
+   "label": "SINGLE/.cursorrules",
+   "kind": "body"
+  },
+  "ZMEYHREWD5G3": {
+   "path": "$XTOOL_ROOT/fixtures/single-cursor_rules_plain_mdc/repo/.cursor/rules/plain.mdc",
+   "label": "SINGLE/.cursor/rules/plain.mdc",
+   "kind": "body"
+  },
+  "5H86SPHF8RFE": {
+   "path": "$XTOOL_ROOT/fixtures/single-cursor_rules_plain_mdc/repo/.cursor/rules/plain.mdc",
+   "label": "SINGLE/.cursor/rules/plain.mdc",
+   "kind": "frontmatter"
+  },
+  "QM8MYPA2W4OS": {
+   "path": "$XTOOL_ROOT/fixtures/single-cursor_rules_always_mdc/repo/.cursor/rules/always.mdc",
+   "label": "SINGLE/.cursor/rules/always.mdc",
+   "kind": "body"
+  },
+  "7JK301QHLG42": {
+   "path": "$XTOOL_ROOT/fixtures/single-cursor_rules_always_mdc/repo/.cursor/rules/always.mdc",
+   "label": "SINGLE/.cursor/rules/always.mdc",
+   "kind": "frontmatter"
+  },
+  "QGMV77UE34NO": {
+   "path": "$XTOOL_ROOT/fixtures/single-cursor_rules_sql_mdc/repo/.cursor/rules/sql.mdc",
+   "label": "SINGLE/.cursor/rules/sql.mdc",
+   "kind": "body"
+  },
+  "LI6UTUCDY5KF": {
+   "path": "$XTOOL_ROOT/fixtures/single-cursor_rules_sql_mdc/repo/.cursor/rules/sql.mdc",
+   "label": "SINGLE/.cursor/rules/sql.mdc",
+   "kind": "frontmatter"
+  },
+  "ATDJ5KPJLJYH": {
+   "path": "$XTOOL_ROOT/fixtures/single-cursor_rules_notmdc_md/repo/.cursor/rules/notmdc.md",
+   "label": "SINGLE/.cursor/rules/notmdc.md",
+   "kind": "body"
+  },
+  "956M20OKJSTO": {
+   "path": "$XTOOL_ROOT/fixtures/single-claude_rules_plain_md/repo/.claude/rules/plain.md",
+   "label": "SINGLE/.claude/rules/plain.md",
+   "kind": "body"
+  },
+  "GRU98QDRPLXY": {
+   "path": "$XTOOL_ROOT/fixtures/single-claude_rules_api_md/repo/.claude/rules/api.md",
+   "label": "SINGLE/.claude/rules/api.md",
+   "kind": "body"
+  },
+  "N7EFS2K168LF": {
+   "path": "$XTOOL_ROOT/fixtures/single-claude_rules_api_md/repo/.claude/rules/api.md",
+   "label": "SINGLE/.claude/rules/api.md",
+   "kind": "frontmatter"
+  },
+  "FQRJHN8V6BIZ": {
+   "path": "$XTOOL_ROOT/fixtures/single-github_copilot-instructions_md/repo/.github/copilot-instructions.md",
+   "label": "SINGLE/.github/copilot-instructions.md",
+   "kind": "body"
+  },
+  "OOJ8G9BEXWEB": {
+   "path": "$XTOOL_ROOT/fixtures/single-github_instructions_all_instructions_md/repo/.github/instructions/all.instructions.md",
+   "label": "SINGLE/.github/instructions/all.instructions.md",
+   "kind": "body"
+  },
+  "BXVLP1RC3HN7": {
+   "path": "$XTOOL_ROOT/fixtures/single-github_instructions_all_instructions_md/repo/.github/instructions/all.instructions.md",
+   "label": "SINGLE/.github/instructions/all.instructions.md",
+   "kind": "frontmatter"
+  },
+  "59D1OVP34EZ1": {
+   "path": "$XTOOL_ROOT/fixtures/single-github_instructions_sql_instructions_md/repo/.github/instructions/sql.instructions.md",
+   "label": "SINGLE/.github/instructions/sql.instructions.md",
+   "kind": "body"
+  },
+  "0G2UJNXPERIL": {
+   "path": "$XTOOL_ROOT/fixtures/single-github_instructions_sql_instructions_md/repo/.github/instructions/sql.instructions.md",
+   "label": "SINGLE/.github/instructions/sql.instructions.md",
+   "kind": "frontmatter"
+  },
+  "IDEAHSQ1BCR2": {
+   "path": "$XTOOL_ROOT/fixtures/pair-agents-claude/repo/AGENTS.md",
+   "label": "PAIR/AGENTS.md",
+   "kind": "body"
+  },
+  "G259AN8YT1O3": {
+   "path": "$XTOOL_ROOT/fixtures/pair-agents-claude/repo/CLAUDE.md",
+   "label": "PAIR/CLAUDE.md",
+   "kind": "body"
+  },
+  "9BOB50MBXLEZ": {
+   "path": "$XTOOL_ROOT/fixtures/case/repo/agents.md",
+   "label": "CASE/agents.md",
+   "kind": "body"
+  },
+  "5NQ3AZ8HNN6T": {
+   "path": "$XTOOL_ROOT/fixtures/case/repo/Claude.md",
+   "label": "CASE/Claude.md",
+   "kind": "body"
+  },
+  "PL9VQC2P7Q4W": {
+   "path": "$XTOOL_ROOT/fixtures/case/repo/.github/Copilot-Instructions.md",
+   "label": "CASE/.github/Copilot-Instructions.md",
+   "kind": "body"
+  },
+  "UKGNNLF64S5U": {
+   "path": "$XTOOL_ROOT/fixtures/size-40k/repo/AGENTS.md",
+   "label": "size-40k/AGENTS.md (start)",
+   "kind": "body"
+  },
+  "857F322VZROO": {
+   "path": "$XTOOL_ROOT/fixtures/size-40k/repo/AGENTS.md",
+   "label": "size-40k/AGENTS.md (end)",
+   "kind": "body"
+  },
+  "EGS3GFU4OD41": {
+   "path": "$XTOOL_ROOT/fixtures/size-40k/repo/CLAUDE.md",
+   "label": "size-40k/CLAUDE.md (start)",
+   "kind": "body"
+  },
+  "XRA8YUR1F25R": {
+   "path": "$XTOOL_ROOT/fixtures/size-40k/repo/CLAUDE.md",
+   "label": "size-40k/CLAUDE.md (end)",
+   "kind": "body"
+  },
+  "M78XVKO9UDTF": {
+   "path": "$XTOOL_ROOT/fixtures/size-40k/repo/.github/copilot-instructions.md",
+   "label": "size-40k/copilot-instructions.md (start)",
+   "kind": "body"
+  },
+  "SSOHJ6SVIKDF": {
+   "path": "$XTOOL_ROOT/fixtures/size-40k/repo/.github/copilot-instructions.md",
+   "label": "size-40k/copilot-instructions.md (end)",
+   "kind": "body"
+  },
+  "S5E9TNLTIWG7": {
+   "path": "$XTOOL_ROOT/fixtures/size-40k/repo/.cursor/rules/small.mdc",
+   "label": "size-40k/small.mdc",
+   "kind": "body"
+  },
+  "XKEE50SPA6JS": {
+   "path": "$XTOOL_ROOT/fixtures/size-40k/repo/.cursor/rules/small.mdc",
+   "label": "size-40k/small.mdc",
+   "kind": "frontmatter"
+  },
+  "BZQXVKM5TVNA": {
+   "path": "$XTOOL_ROOT/fixtures/size-120k/repo/AGENTS.md",
+   "label": "size-120k/AGENTS.md (start)",
+   "kind": "body"
+  },
+  "4SS3DLJRTNAC": {
+   "path": "$XTOOL_ROOT/fixtures/size-120k/repo/AGENTS.md",
+   "label": "size-120k/AGENTS.md (end)",
+   "kind": "body"
+  },
+  "OU56SBXQ25G6": {
+   "path": "$XTOOL_ROOT/fixtures/size-120k/repo/CLAUDE.md",
+   "label": "size-120k/CLAUDE.md (start)",
+   "kind": "body"
+  },
+  "3G5ACXNESILT": {
+   "path": "$XTOOL_ROOT/fixtures/size-120k/repo/CLAUDE.md",
+   "label": "size-120k/CLAUDE.md (end)",
+   "kind": "body"
+  },
+  "KTDKK6S2SSGO": {
+   "path": "$XTOOL_ROOT/fixtures/size-120k/repo/.github/copilot-instructions.md",
+   "label": "size-120k/copilot-instructions.md (start)",
+   "kind": "body"
+  },
+  "UT1TAB7IU2YG": {
+   "path": "$XTOOL_ROOT/fixtures/size-120k/repo/.github/copilot-instructions.md",
+   "label": "size-120k/copilot-instructions.md (end)",
+   "kind": "body"
+  },
+  "6XZWPSW9T3XZ": {
+   "path": "$XTOOL_ROOT/fixtures/size-120k/repo/.cursor/rules/small.mdc",
+   "label": "size-120k/small.mdc",
+   "kind": "body"
+  },
+  "O0OWCEDGKX1I": {
+   "path": "$XTOOL_ROOT/fixtures/size-120k/repo/.cursor/rules/small.mdc",
+   "label": "size-120k/small.mdc",
+   "kind": "frontmatter"
+  },
+  "K3H7K40I5UD3": {
+   "path": "$XTOOL_ROOT/fixtures/lang/repo/AGENTS.md",
+   "label": "LANG/AGENTS.md",
+   "kind": "body"
+  },
+  "C1W74YZAJHO2": {
+   "path": "$XTOOL_ROOT/fixtures/lang/repo/CLAUDE.md",
+   "label": "LANG/CLAUDE.md",
+   "kind": "body"
+  },
+  "N4ZY7S5QEBC0": {
+   "path": "$XTOOL_ROOT/fixtures/lang/repo/.github/copilot-instructions.md",
+   "label": "LANG/.github/copilot-instructions.md",
+   "kind": "body"
+  },
+  "XYDCW4WRDE79": {
+   "path": "$XTOOL_ROOT/fixtures/lang/repo/.cursor/rules/lang.mdc",
+   "label": "LANG/.cursor/rules/lang.mdc",
+   "kind": "body"
+  },
+  "ILM9MC6DGW3V": {
+   "path": "$XTOOL_ROOT/fixtures/lang/repo/.cursor/rules/lang.mdc",
+   "label": "LANG/.cursor/rules/lang.mdc",
+   "kind": "frontmatter"
+  }
+ },
+ "tags": {
+  "2DOEU8": "$XTOOL_ROOT/fixtures/detect-parent/AGENTS.md",
+  "P5L1RQ": "$XTOOL_ROOT/fixtures/detect-parent/repo/AGENTS.md",
+  "K24244": "$XTOOL_ROOT/fixtures/detect-parent/repo/AGENTS.override.md",
+  "8OX9Z3": "$XTOOL_ROOT/fixtures/detect-parent/repo/CLAUDE.md",
+  "MW6ZKD": "$XTOOL_ROOT/fixtures/detect-parent/repo/CLAUDE.local.md",
+  "CFFS3U": "$XTOOL_ROOT/fixtures/detect-parent/repo/.claude/CLAUDE.md",
+  "WF7L8P": "$XTOOL_ROOT/fixtures/detect-parent/repo/CORTEX.md",
+  "ZVH8N4": "$XTOOL_ROOT/fixtures/detect-parent/repo/SNOWFLAKE.md",
+  "405UDD": "$XTOOL_ROOT/fixtures/detect-parent/repo/RULES.md",
+  "839Y4Q": "$XTOOL_ROOT/fixtures/detect-parent/repo/GEMINI.md",
+  "D0G75X": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursorrules",
+  "44GFBP": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursor/rules/plain.mdc",
+  "B6MSHL": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursor/rules/always.mdc",
+  "JI1SN1": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursor/rules/sql.mdc",
+  "FA7UPX": "$XTOOL_ROOT/fixtures/detect-parent/repo/.cursor/rules/notmdc.md",
+  "QN927A": "$XTOOL_ROOT/fixtures/detect-parent/repo/.claude/rules/plain.md",
+  "FTN2VN": "$XTOOL_ROOT/fixtures/detect-parent/repo/.claude/rules/api.md",
+  "3BVAYX": "$XTOOL_ROOT/fixtures/detect-parent/repo/.github/copilot-instructions.md",
+  "VMM521": "$XTOOL_ROOT/fixtures/detect-parent/repo/.github/instructions/all.instructions.md",
+  "OVU5BK": "$XTOOL_ROOT/fixtures/detect-parent/repo/.github/instructions/sql.instructions.md",
+  "G5UQXD": "$XTOOL_ROOT/fixtures/detect-parent/repo/docs/AGENTS.md",
+  "AN2JEJ": "$XTOOL_ROOT/fixtures/detect-parent/repo/docs/CLAUDE.md",
+  "BI5DIH": "$XTOOL_ROOT/fixtures/detect-parent/repo/src/api/AGENTS.md",
+  "ONS2ET": "$XTOOL_ROOT/fixtures/detect-parent/repo/packages/pkg-a/AGENTS.md",
+  "GX9MEX": "$XTOOL_ROOT/fixtures/detect-parent/repo/packages/pkg-a/CLAUDE.md",
+  "U0N6ZU": "$XTOOL_ROOT/fixtures/detect-parent/repo/packages/pkg-a/src/AGENTS.md",
+  "PVNUS8": "$XTOOL_ROOT/fixtures/single-agents_md/repo/AGENTS.md",
+  "MS01VZ": "$XTOOL_ROOT/fixtures/single-agents_override_md/repo/AGENTS.override.md",
+  "80HYSG": "$XTOOL_ROOT/fixtures/single-claude_md/repo/CLAUDE.md",
+  "39NGSD": "$XTOOL_ROOT/fixtures/single-claude_local_md/repo/CLAUDE.local.md",
+  "ZHD4FA": "$XTOOL_ROOT/fixtures/single-claude_claude_md/repo/.claude/CLAUDE.md",
+  "7DJ5PA": "$XTOOL_ROOT/fixtures/single-cortex_md/repo/CORTEX.md",
+  "N3V4UG": "$XTOOL_ROOT/fixtures/single-snowflake_md/repo/SNOWFLAKE.md",
+  "BL1BHD": "$XTOOL_ROOT/fixtures/single-rules_md/repo/RULES.md",
+  "0Z4PZ5": "$XTOOL_ROOT/fixtures/single-gemini_md/repo/GEMINI.md",
+  "CF6K9X": "$XTOOL_ROOT/fixtures/single-cursorrules/repo/.cursorrules",
+  "I7ITPR": "$XTOOL_ROOT/fixtures/single-cursor_rules_plain_mdc/repo/.cursor/rules/plain.mdc",
+  "OBBDP8": "$XTOOL_ROOT/fixtures/single-cursor_rules_always_mdc/repo/.cursor/rules/always.mdc",
+  "VZ5K9F": "$XTOOL_ROOT/fixtures/single-cursor_rules_sql_mdc/repo/.cursor/rules/sql.mdc",
+  "278HJF": "$XTOOL_ROOT/fixtures/single-cursor_rules_notmdc_md/repo/.cursor/rules/notmdc.md",
+  "W2OHN1": "$XTOOL_ROOT/fixtures/single-claude_rules_plain_md/repo/.claude/rules/plain.md",
+  "IC4K4C": "$XTOOL_ROOT/fixtures/single-claude_rules_api_md/repo/.claude/rules/api.md",
+  "Y8EIL9": "$XTOOL_ROOT/fixtures/single-github_copilot-instructions_md/repo/.github/copilot-instructions.md",
+  "BBWV2S": "$XTOOL_ROOT/fixtures/single-github_instructions_all_instructions_md/repo/.github/instructions/all.instructions.md",
+  "NW2KZI": "$XTOOL_ROOT/fixtures/single-github_instructions_sql_instructions_md/repo/.github/instructions/sql.instructions.md",
+  "ZZSTA9": "$XTOOL_ROOT/fixtures/pair-agents-claude/repo/AGENTS.md",
+  "65PT8V": "$XTOOL_ROOT/fixtures/pair-agents-claude/repo/CLAUDE.md",
+  "QZEYV9": "$XTOOL_ROOT/fixtures/case/repo/agents.md",
+  "7UAENT": "$XTOOL_ROOT/fixtures/case/repo/Claude.md",
+  "DSMLT8": "$XTOOL_ROOT/fixtures/case/repo/.github/Copilot-Instructions.md",
+  "2Q4DDV": "$XTOOL_ROOT/fixtures/size-40k/repo/.cursor/rules/small.mdc",
+  "W4HU1A": "$XTOOL_ROOT/fixtures/size-120k/repo/.cursor/rules/small.mdc",
+  "624RYD": "$XTOOL_ROOT/fixtures/lang/repo/AGENTS.md",
+  "D8YZZ2": "$XTOOL_ROOT/fixtures/lang/repo/CLAUDE.md",
+  "TO2IK4": "$XTOOL_ROOT/fixtures/lang/repo/.github/copilot-instructions.md",
+  "6JAQR1": "$XTOOL_ROOT/fixtures/lang/repo/.cursor/rules/lang.mdc"
+ }
+}

@@ -40,7 +40,7 @@ python3 phaseD.py   # ユーザースコープのケース（~ 配下を一時�
 
 ## ツール横断の検証キット（cross-tool/）
 
-CoCo の結果で docs と異なる挙動が見つかったため、同じ手法で Claude Code・Codex CLI・Cursor・GitHub Copilot も実測できるキットを [`cross-tool/`](cross-tool/) に置いています。結果は含まず、手順・ダミー環境の生成・実行・集計のスクリプトだけです。
+CoCo の結果で docs と異なる挙動が見つかったため、同じ手法で Claude Code・Codex CLI・Cursor・GitHub Copilot も実測できるキットを [`cross-tool/`](cross-tool/) に置いています。2026-11-16 の CoCo CLI 1.2.44 と Cursor CLI の実測結果は [`cross-tool/results-2026-11-16/`](cross-tool/results-2026-11-16/) にあります。
 
 - 要件定義書: [`cross-tool/REQUIREMENTS.md`](cross-tool/REQUIREMENTS.md)
 - 使い方: [`cross-tool/README.md`](cross-tool/README.md)
